@@ -1,3 +1,3 @@
 # E-COMMERCE ERD
 
-![ERD](E:\xampp\htdocs\capstone\e-commerce.png)
+![ERD](e-commerce.png)
