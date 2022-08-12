@@ -1,0 +1,44 @@
+.logout a {
+  text-decoration: none;
+}
+form {
+  width: 200px;
+}
+form .text-field {
+  position: relative;
+  margin: 10px 2.5px 20px 2.5px;
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+}
+form .text-field input {
+  display: inline-block;
+  border: thin solid #fafafa;
+  color: #444;
+  background-color: #fafafa;
+  padding: 10px 10px 10px 10px;
+  border-radius: 0.25rem;
+}
+form .text-field input:focus {
+  background-color: #fff;
+}
+form .text-field label {
+  color: #999;
+  position: absolute;
+  pointer-events: none;
+  left: 10px;
+  top: 10px;
+  transition: 0.2s;
+}
+form .text-field input:focus ~ label,
+form .text-field input:valid ~ label {
+  top: -10px;
+  left: 15px;
+  font-size: small;
+  color: gray;
+  background-color: #fff;
+  padding: 0 5px 0 5px;
+}
+.status {
+  margin: 10px 2.5px 20px 2.5px;
+  width: 200px;
+}
