@@ -1,0 +1,9 @@
+.logout a {
+  text-decoration: none;
+}
+.shipping {
+  padding: 10px 20px;
+  background-color: lightyellow;
+  border-radius: 5px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}

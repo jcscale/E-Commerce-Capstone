@@ -1,8 +1,22 @@
 .logout a {
   text-decoration: none;
 }
+.td_input_form {
+  width: 50px;
+  display: inline-block;
+}
+.td_input {
+  width: 50px;
+}
+.td_update {
+  display: inline-block;
+  cursor: pointer;
+}
+.td_delete {
+  display: inline-block;
+}
 form {
-  width: 200px;
+  width: 700px;
 }
 form .text-field {
   position: relative;
@@ -30,7 +44,7 @@ form .text-field label {
   transition: 0.2s;
 }
 form .text-field input:focus ~ label,
-form .text-field input:valid ~ label {
+form .text-field input:not(:placeholder-shown) ~ label {
   top: -10px;
   left: 15px;
   font-size: small;
@@ -38,7 +52,16 @@ form .text-field input:valid ~ label {
   background-color: #fff;
   padding: 0 5px 0 5px;
 }
-.status {
-  margin: 0px 2.5px 20px 2.5px;
-  width: 200px;
+form .shipping {
+  display: inline-block;
+  width: 300px;
+  vertical-align: top;
+}
+form .billing {
+  width: 300px;
+  display: inline-block;
+  margin-left: 20px;
+}
+.continue {
+  margin-left: 85%;
 }
