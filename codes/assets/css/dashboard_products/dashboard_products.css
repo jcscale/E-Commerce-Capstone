@@ -1,0 +1,95 @@
+.logout a {
+  text-decoration: none;
+}
+form .text-field {
+  position: relative;
+  margin: 0px 2.5px 0px 2.5px;
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+}
+form .text-field input,
+form .text-field textarea,
+form .text-field select {
+  display: inline-block;
+  border: thin solid #fafafa;
+  color: #444;
+  background-color: #fafafa;
+  padding: 10px 10px 10px 10px;
+  border-radius: 0.25rem;
+}
+form .text-field input:focus,
+form .text-field textarea:focus {
+  background-color: #fff;
+}
+form .text-field label {
+  color: #999;
+  position: absolute;
+  pointer-events: none;
+  left: 10px;
+  top: 10px;
+  transition: 0.2s;
+}
+form .text-field input:focus ~ label,
+form .text-field input:not(:placeholder-shown) ~ label,
+form .text-field textarea:focus ~ label,
+form .text-field textarea:not(:placeholder-shown) ~ label {
+  top: -10px;
+  left: 15px;
+  font-size: small;
+  color: gray;
+  background-color: #fff;
+  padding: 0 5px 0 5px;
+}
+.dropdown .dropdown-toggle {
+  width: 100%;
+  background-color: #fff;
+  border: none;
+  color: black;
+}
+.dropdown .dropdown_p {
+  display: inline-block;
+  width: 100px;
+  margin-left: 10px;
+}
+.dropdown .pencil {
+  margin-top: 12px;
+}
+.select_modal_update {
+  background-color: red;
+}
+.img-sortable {
+  margin: 0px 2.5px 0px 2.5px;
+}
+.img-sortable #sortable {
+  list-style-type: none;
+  margin: auto;
+  padding: 0;
+  width: 60%;
+}
+.img-sortable #sortable #sortable li {
+  margin: 0 3px 3px 3px;
+  padding: 0.4em;
+  padding-left: 1.5em;
+  font-size: 1.4em;
+}
+.img-sortable #sortable #sortable li span {
+  position: absolute;
+  margin-left: -1.3em;
+}
+.current {
+  padding: 3px;
+  border: 1px solid blue;
+  background-color: blue;
+  margin: 0px 3px;
+  text-decoration: none;
+  text-align: center;
+  color: white;
+  box-shadow: 2px 2px gray;
+}
+.digit {
+  display: inline;
+  margin: 0 3px;
+}
+.digit a {
+  text-decoration: none;
+}

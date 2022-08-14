@@ -1,0 +1,126 @@
+.logout {
+    a {
+        text-decoration: none;
+    }
+}
+
+form {
+    // width: 200px;
+    .text-field {
+        position: relative;
+        margin: 0px 2.5px 0px 2.5px;
+        border: 1px solid #ced4da;
+        border-radius: 0.25rem;
+        
+    
+        input, textarea, select {
+            display: inline-block;
+            border: thin solid #fafafa;
+            color: #444;
+            background-color: #fafafa;
+            padding: 10px 10px 10px 10px;
+            // border-top-left-radius: 10px;
+            // border-top-right-radius: 10px;
+            border-radius: 0.25rem;
+        }
+    
+        input:focus, textarea:focus {
+            background-color:#fff;
+        }
+    
+        label {
+            color: #999;
+            position: absolute;
+            pointer-events: none;
+            left: 10px;
+            top: 10px;
+            transition: 0.2s;
+        }
+    
+        input:focus ~ label, input:not(:placeholder-shown) ~ label, textarea:focus ~ label, textarea:not(:placeholder-shown) ~ label {
+            top: -10px;
+            left: 15px;
+            font-size: small;
+            color: gray;
+            background-color:#fff;
+            padding:0 5px 0 5px;
+        }
+        
+    }
+
+    
+   
+}
+
+
+.dropdown {
+    .dropdown-toggle {
+        width: 100%;
+        background-color: #fff;
+        border: none;
+        color: black;
+    }
+    
+   .dropdown_p {
+    display: inline-block;
+    width: 100px;
+    margin-left: 10px;
+   }
+
+//    a, .pencil {
+//     visibility: hidden;
+//    }
+
+   .pencil {
+    margin-top: 12px;
+   }
+}
+
+.select_modal_update {
+    background-color: red;
+}
+
+.img-sortable {
+    margin: 0px 2.5px 0px 2.5px;
+
+    #sortable { 
+        list-style-type: none; 
+        margin: auto; 
+        padding: 0; 
+        width: 60%; 
+    
+        #sortable li { 
+            margin: 0 3px 3px 3px; 
+            padding: 0.4em; 
+            padding-left: 1.5em; 
+            font-size: 1.4em; 
+
+        }
+    
+        #sortable li span { 
+            position: absolute; 
+            margin-left: -1.3em; 
+        }
+    }
+}
+
+.current {
+    padding: 3px;
+    border: 1px solid blue;
+    background-color: blue;
+    margin: 0px 3px;
+    text-decoration: none;
+    text-align: center;
+    color: white;
+    box-shadow: 2px 2px gray;
+  }
+
+  .digit {
+    display: inline;
+    margin: 0 3px;
+  }
+  .digit a {
+    text-decoration: none;
+    
+  }
+

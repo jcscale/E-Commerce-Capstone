@@ -6,7 +6,5 @@
   <body>
 
   <div class="container">
-    welcome
-    <?=$this->session->userdata('first_name')?>
-    <a class="nav-link" href="<?=base_url();?>logout">Logout</a>
+      
   </div>

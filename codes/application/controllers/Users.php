@@ -16,7 +16,8 @@ class Users extends CI_Controller {
             $this->load->view('templates/footer.php');
         }
         else {
-            redirect('dashboards');
+            // redirect('dashboards');
+            $current_user_id == 1 ? redirect('dashboards') : redirect('products');
         }
     }
 
@@ -32,7 +33,7 @@ class Users extends CI_Controller {
             $this->load->view('templates/footer.php');
         }
         else {
-            redirect('dashboards');
+            $current_user_id == 1 ? redirect('dashboards') : redirect('products');
         }
     }
 
@@ -50,7 +51,7 @@ class Users extends CI_Controller {
 
             if($result == 'success') {
                 $this->session->set_userdata(array('user_id' => $user['id'], 'first_name' => $user['first_name']));
-                redirect('dashboards');
+                $user['id'] == 1 ? redirect('dashboards') : redirect('products');
             }
             else {
                 $this->session->set_flashdata('input_errors', $result);
@@ -71,7 +72,8 @@ class Users extends CI_Controller {
             $this->load->view('templates/footer.php');
         }
         else {
-            redirect('dashboards');
+            // redirect('dashboards');
+            $current_user_id == 1 ? redirect('dashboards') : redirect('products');
         }
     }
 
@@ -93,7 +95,8 @@ class Users extends CI_Controller {
             $new_user = $this->user->get_user_by_email($form_data['email']);
             $this->session->set_userdata(array('user_id' => $new_user['id'], 'first_name' => $new_user['first_name']));
 
-            redirect('dashboards');
+            // redirect('dashboards');
+            $new_user['id'] == 1 ? redirect('dashboards') : redirect('products');
         }
     }
 

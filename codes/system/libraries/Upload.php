@@ -452,7 +452,8 @@ class CI_Upload {
 		// Skip MIME type detection?
 		if ($this->detect_mime !== FALSE)
 		{
-			$this->_file_mime_type($_file);
+			$this->_file_mime_type($_file); 
+			// var_dump($this->file_type); die();
 		}
 
 		$this->file_type = preg_replace('/^(.+?);.*$/', '\\1', $this->file_type);

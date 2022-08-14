@@ -55,9 +55,18 @@ $route['translate_uri_dashes'] = FALSE;
 
 $route['signup'] = 'users/signup';
 $route['signin'] = 'users/signin';
+$route['logout'] = 'users/logout';
 
+
+/////////////////// DASHBOARD ///////////////////
 
 $route['dashboards'] = 'dashboards';
+$route['products'] = 'dashboards/products';
+$route['index_html'] = 'dashboards/index_html';
+$route['(:any)'] = 'dashboards/loadData/$1';
+
+$route['(:any)'] = 'dashboards/delete_product/$1';
 
 
-$route['logout'] = 'users/logout';
+
+
