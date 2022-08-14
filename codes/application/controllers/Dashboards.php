@@ -13,50 +13,52 @@ class Dashboards extends CI_Controller {
         }
     }
 
-    public function loadData($record=0) {
-		$recordPerPage = 3;
-		if($record != 0){
-			$record = ($record-1) * $recordPerPage;
-		}      	
-      	$recordCount = $this->dashboard->get_count();
-      	$empRecord = $this->dashboard->fetch_all_products($record,$recordPerPage);
-      	$config['base_url'] = base_url() . "dashboards/loadData";
-      	$config['use_page_numbers'] = TRUE;
+    // public function loadData($record=0) {
+	// 	$recordPerPage = 3;
+	// 	if($record != 0){
+	// 	    	$record = ($record-1) * $recordPerPage;
+	// 	}      	
+    //   	$recordCount = $this->dashboard->get_count();
+    //   	$empRecord = $this->dashboard->fetch_all_products($record,$recordPerPage);
+    //   	$config['base_url'] = base_url() . "dashboards/loadData";
+    //   	$config['use_page_numbers'] = TRUE;
         
-		// $config['next_link'] = '<i class="pagi-next" style="border:1px solid blue; padding: 3px; text-decoration:none;">Next</i>';
-		// $config['prev_link'] = '<i class="pagi-prev" style="border:1px solid blue; padding: 3px; text-decoration:none;">Previous</i>';
+	// 	// $config['next_link'] = '<i class="pagi-next" style="border:1px solid blue; padding: 3px; text-decoration:none;">Next</i>';
+	// 	// $config['prev_link'] = '<i class="pagi-prev" style="border:1px solid blue; padding: 3px; text-decoration:none;">Previous</i>';
 
         
 
-        // $config['num_links'] = 1;
-		$config['total_rows'] = $recordCount;
-		$config['per_page'] = $recordPerPage;
+    //     // $config['num_links'] = 1;
+	// 	$config['total_rows'] = $recordCount;
+	// 	$config['per_page'] = $recordPerPage;
 
-        //Set that how many number of pages you want to view.
-        $config['num_links'] = $recordCount;
+    //     //Set that how many number of pages you want to view.
+    //     $config['num_links'] = $recordCount;
 
-        $config['num_tag_open'] = '<div class="digit">';
+    //     $config['num_tag_open'] = '<div class="digit">';
 
 
-        $config['num_tag_close'] = '</div>';
+    //     $config['num_tag_close'] = '</div>';
 
-        // Open tag for CURRENT link.
-        $config['cur_tag_open'] = '&nbsp;<a class="current">';
+    //     // Open tag for CURRENT link.
+    //     $config['cur_tag_open'] = '&nbsp;<a class="current">';
 
-        // Close tag for CURRENT link.
-        $config['cur_tag_close'] = '</a>';
+    //     // Close tag for CURRENT link.
+    //     $config['cur_tag_close'] = '</a>';
 
-        // By clicking on performing NEXT pagination.
-        $config['next_link'] = 'Next';
+    //     // By clicking on performing NEXT pagination.
+    //     $config['next_link'] = 'Next';
 
-        // By clicking on performing PREVIOUS pagination.
-        $config['prev_link'] = 'Previous';
+    //     // By clicking on performing PREVIOUS pagination.
+    //     $config['prev_link'] = 'Previous';
 
-		$this->pagination->initialize($config);
-		$data['pagination'] = $this->pagination->create_links();
-		$data['products'] = $empRecord;
-        return $this->load->view('partials/dashboard_products', $data);
-	}
+	// 	$this->pagination->initialize($config);
+	// 	$data['pagination'] = $this->pagination->create_links();
+	// 	$data['products'] = $empRecord;
+    //     $data['categories'] = $this->dashboard->fetch_all_categories();
+    //     return $this->load->view('partials/dashboard_products', $data);
+    //     // return $data;
+	// }
 
      /*  DOCU: This function is triggered by default if the user is an admin.
         Owner: JC
@@ -76,7 +78,10 @@ class Dashboards extends CI_Controller {
     */
     public function products() {
         $data['categories'] = $this->dashboard->fetch_all_categories();
-        // $data['products'] = $this->dashboard->fetch_all_products();
+        $data['products'] = $this->dashboard->fetch_all_products();
+
+
+        $data['categories'] = $this->dashboard->fetch_all_categories();
         
         $this->load->view('templates/header.php');
         $this->load->view('templates/admin_navbar.php');
@@ -85,21 +90,13 @@ class Dashboards extends CI_Controller {
         
     }
 
-    public function index_html() {
-
-        $this->loadData();
-    }
-
     public function add_product() {
         $config['allowed_types'] = 'png|jpg|jpeg';
         $config['upload_path'] = './uploads/';
-        // $config['max_size'] = 100;
-        // $config['max_width'] = 1024;
-        // $config['max_height'] = 768;
         $this->load->library('upload', $config);
 
         $product = $this->input->post();
-
+        var_dump($product);
         if($this->upload->do_upload('image')) {
             $filename = $this->upload->data();
 
@@ -130,6 +127,28 @@ class Dashboards extends CI_Controller {
 
     public function delete_product($id) {
         $this->dashboard->delete_product($id);
+        redirect('products');
+    }
+
+    public function product_detail($id) {
+        $result = $this->dashboard->get_product_by_id($id);
+        echo json_encode($result);
+        // redirect('products');
+    }
+
+    public function update_product() {
+        $result = $this->input->post();
+        
+        $id = $result['edit_id'];
+        $data = array(
+            'name' => $result['edit_name'],
+            'description' => $result['edit_description'],
+            'inventory_count' => $result['edit_inventory_count'],
+            'quantity_sold' => $result['edit_quantity_sold'],
+            'category_id' => $result['category_id']
+        );
+
+        $this->dashboard->update_product($id, $data);
         redirect('products');
     }
 }

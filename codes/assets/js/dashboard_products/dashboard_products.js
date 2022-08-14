@@ -1,17 +1,42 @@
 $(document).ready(function(){
-    createPagination(0)
+    $("#edit_modal").modal();
+    // createPagination(0)
 
-    $('#products').on('click','a',function(e){
-      e.preventDefault(); 
-      var pageNum = $(this).attr('data-ci-pagination-page');
-      createPagination(pageNum);
-    });
+    // $('#products').on('click','.keychainify-checked',function(e){
+    //   e.preventDefault(); 
+    //   var pageNum = $(this).attr('data-ci-pagination-page');
+    //   createPagination(pageNum);
+    // });
 
-    function createPagination(pageNum) {
-        $.get('/capstone/codes/dashboards/loadData/'+pageNum, function(res) {
-          $('#products').html(res);
-        });
-    }  
+    // function createPagination(pageNum) {
+    //     $.get('/capstone/codes/dashboards/loadData/'+pageNum, function(res) {
+    //       $('#products').html(res);
+    //     });
+    // }  
+
+    // $(document).on('submit', 'form', function(e){
+    //     e.preventDefault();
+    //     $.post($(this).attr('action'), $(this).serialize(), function(data){
+    //         console.log(data)
+    //         $('#products').html(data);
+    //     });
+    //     return false;
+    // });
+    // $('form').submit();
+
+    $(document).on('click', '#product_detail', function(e){
+        e.preventDefault();
+        $.get($(this).attr('href'), function(data) {
+            console.log(data)   
+            $('#edit_id').val(data.id);
+            $('#edit_name').val(data.name);
+            $('#edit_description').val(data.description);
+            $('#edit_inventory_count').val(data.inventory_count);
+            $('#edit_quantity_sold').val(data.quantity_sold);
+        },'json');
+    })
+    
+
 
 
     $( function() {
@@ -24,7 +49,7 @@ $(document).ready(function(){
     $('.pencil').css('visibility', 'hidden')
     $('.trash').css('visibility', 'hidden')
     // $('input#hide_id').val(123)
-    console.log( $('input#hide_id').val())
+    // console.log( $('input#hide_id').val())
 
     $('.dropdown_li').each(function(){
         $(this).mouseover(function(e) {
@@ -55,8 +80,6 @@ $(document).ready(function(){
         $(this).click(function(e) {
             var category_name = $(this).find('input.dropdown_input').val();
             var category_id = $(this).find('input.hidden_id').val();
-            console.log(category_name)
-            console.log(category_id)
             $('#dropdownMenuButton1').text(category_name);
             $('input#hide_id').val(category_id);
             console.log( $('input#hide_id').val())

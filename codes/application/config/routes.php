@@ -62,10 +62,11 @@ $route['logout'] = 'users/logout';
 
 $route['dashboards'] = 'dashboards';
 $route['products'] = 'dashboards/products';
-$route['index_html'] = 'dashboards/index_html';
-$route['(:any)'] = 'dashboards/loadData/$1';
+// $route['index_html'] = 'dashboards/index_html';
+// $route['(:any)'] = 'dashboards/loadData/$1';
 
 $route['(:any)'] = 'dashboards/delete_product/$1';
+$route['update_product'] = 'dashboards/update_product';
 
 
 

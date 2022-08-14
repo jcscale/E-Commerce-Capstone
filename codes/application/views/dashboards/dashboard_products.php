@@ -24,17 +24,42 @@
             </div>
         </div>
 
-        <div id="products"></div>
+        <div id="products">
+        <table class="table table-striped">
+        <thead>
+            <tr>
+            <th scope="col">Picture</th>
+            <th scope="col">ID</th>
+            <th scope="col">Name</th>
+            <th scope="col">Inventory Count</th>
+            <th scope="col">Quantity Sold</th>
+            <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach($products as $product){?>
+                <tr>
+                <td><img src="<?=base_url()?>uploads/<?=$product['filename']?>" alt="" height="50" width="50"></td>
+                <td><?=$product['id']?></td>
+                <td><?=$product['name']?></td>
+                <td><?=$product['inventory_count']?></td>
+                <td><?=$product['quantity_sold']?></td>
+                <td>
 
-            <!-- <ul class="pagination d-flex justify-content-center">
-              <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-              <li class="page-item"><a class="page-link" href="#">1</a></li>
-              <li class="page-item"><a class="page-link" href="#">2</a></li>
-              <li class="page-item"><a class="page-link" href="#">3</a></li>
-              <li class="page-item"><a class="page-link" href="#">4</a></li>
-              <li class="page-item"><a class="page-link" href="#">5</a></li>
-              <li class="page-item"><a class="page-link" href="#">Next</a></li>
-            </ul> -->
+                    <!-- <a href="dashboards/product_detail/<?=$product['id']?>" data-bs-toggle="modal" data-bs-target="#edit_modal">edit</a> -->
+                    <a href="dashboards/product_detail/<?=$product['id']?>" id="product_detail" data-bs-toggle="modal" data-bs-target="#edit_modal">edit</a>
+                    <a href="dashboards/delete_product/<?=$product['id']?>">delete</a>
+                    
+                    <!-- <form action="<?=base_url()?>dashboards/delete_product/<?=$product['id']?>" method="POST">
+                        <input class="delete btn btn-danger" type="submit" value="X">
+                    </form> -->
+                    
+                </td>
+            </tr>
+            <?php }?>
+        </tbody>
+    </table>
+        </div>
 
              <!-- Modal -->
              <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -46,10 +71,11 @@
                   </div>
                   <div class="modal-body">
                     
-                    <form action="dashboards/add_product" method="post" enctype="multipart/form-data" id="add_product_form">
+                  <form action="dashboards/add_product" method="post" enctype="multipart/form-data" id="add_product_form">
+                    <!-- <form action="" method="post" enctype="multipart/form-data" id="add_product_form"> -->
                     
                         <div class="text-field mb-3">
-                            <input type="text" placeholder=" " class="form-control" name="name" form="add_product_form">
+                            <input type="text" placeholder=" " class="form-control" name="name" id="name" form="add_product_form">
                             <label>Name</label>
                         </div>
 
@@ -57,17 +83,17 @@
                         
                         <div class="text-field mb-3">
                             <!-- <input type="text" required class="form-control"> -->
-                            <textarea class="form-control" name="description" id="" cols="30" rows="2" placeholder=" " form="add_product_form"></textarea>
+                            <textarea class="form-control" name="description" id="description" cols="30" rows="2" placeholder=" " form="add_product_form"></textarea>
                             <label>Description</label>
                         </div>
 
                         <div class="text-field mb-3">
-                            <input type="number" placeholder=" " class="form-control" name="inventory_count" form="add_product_form">
+                            <input type="number" placeholder=" " class="form-control" id="inventory_count" name="inventory_count" form="add_product_form">
                             <label>Inventory Count</label>
                         </div>
 
                         <div class="text-field mb-3">
-                            <input type="text" placeholder=" " class="form-control" name="quantity_sold" form="add_product_form">
+                            <input type="text" placeholder=" " class="form-control" id="quantity_sold" name="quantity_sold" form="add_product_form">
                             <label>Quantity Sold</label>
                         </div>
                         
@@ -103,14 +129,14 @@
                           
                         <p>Image:</p>
                         <div class="text-field mb-3">
-                            <input type="file" class="form-control" name="image" form="add_product_form">
+                            <input type="file" class="form-control" id="image" name="image" form="add_product_form">
                         </div>
                          
 
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
                             <button type="button" class="btn btn-primary">Preview</button>
-                            <button type="submit" class="btn btn-primary" form="add_product_form">Add</button>
+                            <button type="submit" class="btn btn-primary" form="add_product_form" id="add">Add</button>
                         </div>
                           
                     </form>
@@ -121,7 +147,7 @@
           </div>
 
         <!-- Edit Modal -->
-        <!-- <div class="modal fade" id="edit_modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade" id="edit_modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
               <div class="modal-dialog">
               <div class="modal-content">
                   <div class="modal-header">
@@ -130,32 +156,33 @@
                   </div>
                   <div class="modal-body">
                     
-                    <form action="" method="post" enctype="multipart/form-data" id="">
-                    
+                    <form action="dashboards/update_product" method="post" enctype="multipart/form-data" id="edit_product_form">
+                        
+                        <input type="hidden" value="" id="edit_id" form="edit_product_form" name="edit_id">
                         <div class="text-field mb-3">
-                            <input type="text" placeholder=" " class="form-control" name="name" form="">
+                            <input type="text" placeholder=" " class="form-control" name="edit_name" form="edit_product_form" id="edit_name">
                             <label>Name</label>
                         </div>
 
                         
                         
                         <div class="text-field mb-3">
-                            <textarea class="form-control" name="description" id="" cols="30" rows="2" placeholder=" " form=""></textarea>
+                            <textarea class="form-control" name="edit_description" id="edit_description" cols="30" rows="2" placeholder=" " form="edit_product_form"></textarea>
                             <label>Description</label>
                         </div>
 
                         <div class="text-field mb-3">
-                            <input type="number" placeholder=" " class="form-control" name="inventory_count" form="">
+                            <input type="number" placeholder=" " class="form-control" name="edit_inventory_count" form="edit_product_form" id="edit_inventory_count">
                             <label>Inventory Count</label>
                         </div>
 
                         <div class="text-field mb-3">
-                            <input type="text" placeholder=" " class="form-control" name="quantity_sold" form="">
+                            <input type="text" placeholder=" " class="form-control" name="edit_quantity_sold" form="edit_product_form" id="edit_quantity_sold">
                             <label>Quantity Sold</label>
                         </div>
                         
                         <div class="text-field mb-3">
-                        <input type="text" placeholder=" " class="form-control" name="category">
+                        <input type="text" placeholder=" " class="form-control" name="edit_category">
                         <label>Add new category</label>
                         </div>
 
@@ -163,9 +190,9 @@
                         <div class="text-field mb-3">
                             <div class="dropdown">
                                 <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                                Tools
+                                Tshirts
                                 </button>
-                                <input type="hidden" value="1" id="hide_id" class="hide_id" name="category_id" form="">
+                                <input type="hidden" value="1" id="hide_id" class="hide_id" name="category_id" form="edit_product_form">
                                 
                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                                     <?php foreach($categories as $category){?>
@@ -185,7 +212,7 @@
                           
                         <p>Image:</p>
                         <div class="text-field mb-3">
-                            <input type="file" class="form-control" name="image" form="add_product_form">
+                            <input type="file" class="form-control" name="edit_image" form="edit_product_form" id="edit_image">
                         </div>
 
                         <div class="mb-3 img-sortable">
@@ -200,7 +227,7 @@
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
                             <button type="button" class="btn btn-primary">Preview</button>
-                            <button type="submit" class="btn btn-primary" form="add_product_form">Add</button>
+                            <button type="submit" class="btn btn-primary" form="edit_product_form">Update</button>
                         </div>
                           
                     </form>
@@ -208,7 +235,8 @@
                   
               </div>
               </div>
-          </div> -->
+          </div>
+          <!-- Edit Modal -->
 
        
 

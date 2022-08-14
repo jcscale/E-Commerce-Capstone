@@ -7,12 +7,12 @@ class Dashboard extends CI_Model {
         return $this->db->get('categories')->result_array();
     }
 
-    public function fetch_all_products($rowno,$rowperpage) {
+    public function fetch_all_products() {
         // $this->output->enable_profiler(TRUE);
         $this->db->select('*')
             ->from('products')
-            ->join('images', 'images.product_id = products.id')
-            ->limit($rowperpage, $rowno);  
+            ->join('images', 'images.product_id = products.id');
+            // ->limit($rowperpage, $rowno);  
         $query = $this->db->get()->result_array();
         return $query;
     }
@@ -38,12 +38,24 @@ class Dashboard extends CI_Model {
     }
 
     public function delete_product($id) {
-        $this->output->enable_profiler(TRUE);
+        // $this->output->enable_profiler(TRUE);
         $this->db->where('id', $id);
         $query = $this->db->delete('products');
         return $query;
     }
 
+    public function get_product_by_id($id) {
+        $this->db->join('images', 'images.product_id = products.id')
+            ->where('products.id', $id);
+        $query = $this->db->get('products')->result_array();
+        return $query[0];
+    }
+
+    public function update_product($id, $data) {
+        $this->db->where('id', $id);
+        $query = $this->db->update('products', $data);
+        return $query;
+    }
 }
 
 

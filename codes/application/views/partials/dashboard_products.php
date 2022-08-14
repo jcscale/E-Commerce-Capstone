@@ -20,8 +20,12 @@
                 <td><?=$product['inventory_count']?></td>
                 <td><?=$product['quantity_sold']?></td>
                 <td>
-                    <a href="" data-bs-toggle="modal" data-bs-target="#edit_modal">edit</a>
-                    <a href="dashboards/delete_product/<?=$product['id']?>">delete</a>
+                    <!-- <a href="<?=base_url()?>dashboards/delete_product/<?=$product['id']?>" >delete</a> -->
+                    <a href="#" data-bs-toggle="modal" data-bs-target="#edit_modal">edit</a>
+                    <form action="<?=base_url()?>dashboards/delete_product/<?=$product['id']?>" method="POST">
+                        <input class="delete btn btn-danger" type="submit" value="X">
+                    </form>
+                    
                 </td>
             </tr>
             <?php }?>
