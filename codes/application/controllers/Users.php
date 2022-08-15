@@ -17,7 +17,7 @@ class Users extends CI_Controller {
         }
         else {
             // redirect('dashboards');
-            $current_user_id == 1 ? redirect('dashboards') : redirect('products');
+            $current_user_id == 1 ? redirect('dashboards') : redirect('customers');
         }
     }
 
@@ -33,7 +33,12 @@ class Users extends CI_Controller {
             $this->load->view('templates/footer.php');
         }
         else {
-            $current_user_id == 1 ? redirect('dashboards') : redirect('products');
+            // $current_user_id == 1 ? redirect('dashboards') : redirect('customers');
+            if($current_user_id=="1") {
+                redirect('dashboards');
+            } else {
+                redirect('customers');
+            }
         }
     }
 
@@ -51,7 +56,13 @@ class Users extends CI_Controller {
 
             if($result == 'success') {
                 $this->session->set_userdata(array('user_id' => $user['id'], 'first_name' => $user['first_name']));
-                $user['id'] == 1 ? redirect('dashboards') : redirect('products');
+                $user['is_admin'] == 1 ? redirect('dashboards') : redirect('customers');
+                if($user['is_admin']=="1") {
+                    redirect('dashboards');
+                } else {
+                    redirect('customers');
+                }
+                // redirect('customers');
             }
             else {
                 $this->session->set_flashdata('input_errors', $result);
@@ -73,7 +84,7 @@ class Users extends CI_Controller {
         }
         else {
             // redirect('dashboards');
-            $current_user_id == 1 ? redirect('dashboards') : redirect('products');
+            $current_user_id == 1 ? redirect('dashboards') : redirect('customers');
         }
     }
 
@@ -96,7 +107,7 @@ class Users extends CI_Controller {
             $this->session->set_userdata(array('user_id' => $new_user['id'], 'first_name' => $new_user['first_name']));
 
             // redirect('dashboards');
-            $new_user['id'] == 1 ? redirect('dashboards') : redirect('products');
+            $new_user['id'] == 1 ? redirect('dashboards') : redirect('customers');
         }
     }
 

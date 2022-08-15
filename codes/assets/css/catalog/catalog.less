@@ -1,0 +1,104 @@
+.logout {
+    a {
+        text-decoration: none;
+    }
+}
+
+form {
+    width: 200px;
+    .text-field {
+        position: relative;
+        margin: 0px 2.5px 20px 2.5px;
+        border: 1px solid #ced4da;
+        border-radius: 0.25rem;
+        
+    
+        input {
+            display: inline-block;
+            border: thin solid #fafafa;
+            color: #444;
+            background-color: #fafafa;
+            padding: 10px 10px 10px 10px;
+            // border-top-left-radius: 10px;
+            // border-top-right-radius: 10px;
+            border-radius: 0.25rem;
+        }
+    
+        input:focus {
+            background-color:#fff;
+        }
+    
+        label {
+            color: #999;
+            position: absolute;
+            pointer-events: none;
+            left: 10px;
+            top: 10px;
+            transition: 0.2s;
+        }
+    
+        input:focus ~ label, input:not(:placeholder-shown) ~ label {
+            top: -10px;
+            left: 15px;
+            font-size: small;
+            color: gray;
+            background-color:#fff;
+            padding:0 5px 0 5px;
+        }
+        
+    }
+   
+}
+
+.categories, .all_products {
+    width: 100%;
+    padding: 20px;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+
+    .cate {
+        text-decoration: none;
+        display: block;
+        color: black;
+    }
+    .cate:hover {
+        color: green;
+    }
+}
+
+.all_products {
+
+
+    select {
+        margin: 0px;
+    }
+
+    .product_img {
+        width: 100px;
+        height: 100px;
+        background-color: lightyellow;
+        display: inline-block;
+        margin: 10px 10px;
+
+        .price {
+            position: relative;
+            bottom: 25px;
+            background-color: greenyellow;
+            margin-bottom: 0px;
+            text-align: center;
+        }
+
+        .product_name {
+            text-align: center; 
+            position: relative;
+            bottom: 25px;
+
+        }
+    }
+
+    .product_img:hover {
+    cursor: pointer;
+    background-color: green;
+    }
+}
+

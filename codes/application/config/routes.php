@@ -57,6 +57,10 @@ $route['signup'] = 'users/signup';
 $route['signin'] = 'users/signin';
 $route['logout'] = 'users/logout';
 
+/////////////////// CUSTOMER ///////////////////
+$route['customers'] = 'customers';
+$route['(:any)'] = 'customers/show/$1';
+
 
 /////////////////// DASHBOARD ///////////////////
 
@@ -67,6 +71,9 @@ $route['products'] = 'dashboards/products';
 
 $route['(:any)'] = 'dashboards/delete_product/$1';
 $route['update_product'] = 'dashboards/update_product';
+
+
+
 
 
 

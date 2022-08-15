@@ -103,6 +103,7 @@ class Dashboards extends CI_Controller {
             $data = array(
                 'name' => $product['name'],
                 'description' => $product['description'],
+                'price' => $product['price'],
                 'inventory_count' => $product['inventory_count'],
                 'quantity_sold' => $product['quantity_sold'],
                 'category_id' => $product['category_id']
@@ -131,25 +132,57 @@ class Dashboards extends CI_Controller {
     }
 
     public function product_detail($id) {
-        $result = $this->dashboard->get_product_by_id($id);
+        $result_data = $this->dashboard->get_product_by_id($id);
+        $product_id = $result_data['id'];
+        // $result['images'] = $this->dashboard->fetch_images($product_id);
+
+        $result = array(
+            'res' => $this->dashboard->get_product_by_id($id),
+            'images' => $this->dashboard->fetch_images($product_id)
+        );
+
+        // header('Content-Type: application/json');
         echo json_encode($result);
         // redirect('products');
     }
 
     public function update_product() {
-        $result = $this->input->post();
-        
-        $id = $result['edit_id'];
-        $data = array(
-            'name' => $result['edit_name'],
-            'description' => $result['edit_description'],
-            'inventory_count' => $result['edit_inventory_count'],
-            'quantity_sold' => $result['edit_quantity_sold'],
-            'category_id' => $result['category_id']
-        );
+        $config['allowed_types'] = 'png|jpg|jpeg';
+        $config['upload_path'] = './uploads/';
+        $this->load->library('upload', $config);
 
-        $this->dashboard->update_product($id, $data);
-        redirect('products');
+        if($this->upload->do_upload('edit_image')) {
+
+            $filename = $this->upload->data();
+            $result = $this->input->post();
+
+            $data = array(
+                'name' => $result['edit_name'],
+                'description' => $result['edit_description'],
+                'price' => $result['edit_price'],
+                'inventory_count' => $result['edit_inventory_count'],
+                'quantity_sold' => $result['edit_quantity_sold'],
+                'category_id' => $result['category_id']
+            );
+            $id = $result['edit_id'];
+
+            $file_data = array(
+                'filename' => $filename['file_name'],
+                'product_id' => $id
+            );
+
+            $this->dashboard->product_image($file_data);
+    
+            $this->dashboard->update_product($id, $data);
+
+            redirect('products');
+        }
+        else {
+            print_r($this->upload->display_errors());
+        }
+        
+        
+        
     }
 }
 

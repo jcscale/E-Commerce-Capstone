@@ -24,15 +24,28 @@ $(document).ready(function(){
     // });
     // $('form').submit();
 
+
     $(document).on('click', '#product_detail', function(e){
         e.preventDefault();
+        console.log($(this).attr('href'))
         $.get($(this).attr('href'), function(data) {
-            console.log(data)   
-            $('#edit_id').val(data.id);
-            $('#edit_name').val(data.name);
-            $('#edit_description').val(data.description);
-            $('#edit_inventory_count').val(data.inventory_count);
-            $('#edit_quantity_sold').val(data.quantity_sold);
+            console.log(data)
+            // data = JSON.stringify(data);
+            // console.log(data)
+            var sor = ""
+            for(var i in data.images) {
+                // console.log(data.images[i])
+                sor += '<li class="ui-state-default"><span class="ui-icon ui-icon-grip-solid-horizontal ms-3"></span><img class="ms-3 me-3" src="'+ 'http://localhost/capstone/codes/uploads/'+ data.images[i].filename +'" alt="" width="50" height="50">'+ data.images[i].filename +'<span class="ui-icon ui-icon-trash ms-5"></span></li>'
+                // $("ul#sortable").append('<li class="ui-state-default"><span class="ui-icon ui-icon-grip-solid-horizontal ms-3"></span><img class="ms-3 me-3" src="'+ 'http://localhost/capstone/codes/uploads/'+ data.images[i].filename +'" alt="" width="50" height="50">'+ data.images[i].filename +'<span class="ui-icon ui-icon-trash ms-5"></span></li>')
+            }
+
+            $("ul#sortable").html(sor)
+            $('#edit_id').val(data.res.id);
+            $('#edit_name').val(data.res.name);
+            $('#edit_description').val(data.res.description);
+            $('#edit_price').val(data.res.price);
+            $('#edit_inventory_count').val(data.res.inventory_count);
+            $('#edit_quantity_sold').val(data.res.quantity_sold);
         },'json');
     })
     

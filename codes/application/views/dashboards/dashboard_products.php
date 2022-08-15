@@ -79,12 +79,15 @@
                             <label>Name</label>
                         </div>
 
-                        
-                        
                         <div class="text-field mb-3">
                             <!-- <input type="text" required class="form-control"> -->
                             <textarea class="form-control" name="description" id="description" cols="30" rows="2" placeholder=" " form="add_product_form"></textarea>
                             <label>Description</label>
+                        </div>
+
+                        <div class="text-field mb-3">
+                            <input type="number" placeholder=" " class="form-control" name="price" id="price" form="add_product_form">
+                            <label>Price</label>
                         </div>
 
                         <div class="text-field mb-3">
@@ -106,7 +109,7 @@
                         <div class="text-field mb-3">
                             <div class="dropdown">
                                 <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                                Tools
+                                Tshirts
                                 </button>
                                 <input type="hidden" value="1" id="hide_id" class="hide_id" name="category_id" form="add_product_form">
                                 
@@ -172,6 +175,11 @@
                         </div>
 
                         <div class="text-field mb-3">
+                            <input type="number" placeholder=" " class="form-control" name="edit_price" form="edit_product_form" id="edit_price">
+                            <label>Price</label>
+                        </div>
+
+                        <div class="text-field mb-3">
                             <input type="number" placeholder=" " class="form-control" name="edit_inventory_count" form="edit_product_form" id="edit_inventory_count">
                             <label>Inventory Count</label>
                         </div>
@@ -217,9 +225,9 @@
 
                         <div class="mb-3 img-sortable">
                             <ul id="sortable">
-                              <li class="ui-state-default"><span class="ui-icon ui-icon-grip-solid-horizontal ms-3"></span><img class="ms-3 me-3" src="Pocket-T-shirt_122719.webp" alt="" width="50" height="50">Image 1 <span class="ui-icon ui-icon-trash ms-5"></span></li>
+                              <!-- <li class="ui-state-default"><span class="ui-icon ui-icon-grip-solid-horizontal ms-3"></span><img class="ms-3 me-3" src="Pocket-T-shirt_122719.webp" alt="" width="50" height="50">Image 1 <span class="ui-icon ui-icon-trash ms-5"></span></li>
                               <li class="ui-state-default"><span class="ui-icon ui-icon-grip-solid-horizontal ms-3"></span><img class="ms-3 me-3" src="Pocket-T-shirt_122719.webp" alt="" width="50" height="50">Image 2 <span class="ui-icon ui-icon-trash ms-5"></span></li>
-                              <li class="ui-state-default"><span class="ui-icon ui-icon-grip-solid-horizontal ms-3"></span><img class="ms-3 me-3" src="Pocket-T-shirt_122719.webp" alt="" width="50" height="50">Image 3 <span class="ui-icon ui-icon-trash ms-5"></span></li>
+                              <li class="ui-state-default"><span class="ui-icon ui-icon-grip-solid-horizontal ms-3"></span><img class="ms-3 me-3" src="Pocket-T-shirt_122719.webp" alt="" width="50" height="50">Image 3 <span class="ui-icon ui-icon-trash ms-5"></span></li> -->
                             </ul>
                         </div>
                          
