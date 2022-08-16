@@ -33,7 +33,6 @@ class Users extends CI_Controller {
             $this->load->view('templates/footer.php');
         }
         else {
-            // $current_user_id == 1 ? redirect('dashboards') : redirect('customers');
             if($current_user_id=="1") {
                 redirect('dashboards');
             } else {
@@ -44,7 +43,6 @@ class Users extends CI_Controller {
 
     public function process_signin() {
         $result = $this->user->validate_signin_form();
-        echo $result;
         if($result != "success") {
             $this->session->set_flashdata('input_errors', $result);
             redirect('signin');
@@ -56,13 +54,13 @@ class Users extends CI_Controller {
 
             if($result == 'success') {
                 $this->session->set_userdata(array('user_id' => $user['id'], 'first_name' => $user['first_name']));
-                $user['is_admin'] == 1 ? redirect('dashboards') : redirect('customers');
+                // $user['is_admin'] == 1 ? redirect('dashboards') : redirect('customers');
                 if($user['is_admin']=="1") {
                     redirect('dashboards');
                 } else {
                     redirect('customers');
                 }
-                // redirect('customers');
+                // redirect('dashboards');
             }
             else {
                 $this->session->set_flashdata('input_errors', $result);

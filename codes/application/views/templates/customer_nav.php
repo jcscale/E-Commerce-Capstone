@@ -19,7 +19,7 @@
         </div>
 
         <div class="logout me-3">
-          <a href="">Shopping Cart (0)</a>
+          <a href="<?=base_url()?>customers/cart">Shopping Cart (0)</a>
         </div>
 
         <div class="logout">

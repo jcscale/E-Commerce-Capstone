@@ -1,6 +1,7 @@
-<title>Dashboard</title>
+<title>All Products</title>
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <link rel="stylesheet" href="<?php echo base_url();?>assets/css/product_details/product_details.css">
-
+<script src="<?php echo base_url();?>assets/js/product_details/product_details.js"></script>
   </head>
   <body>    
 
@@ -28,9 +29,10 @@
             </p>
         </div>
         
-        <form action="" class="d-flex justify-content-end"> 
-            <p class="price">($19.99)</p>
-            <input type="number" class="form-control quantity">
+        <form action="<?=base_url()?>customers/temp_orders" method="post" class="d-flex justify-content-end"> 
+            <p class="price" id="product_price" orig-price="<?=$product['price']?>">($<?=$product['price']?>)</p>
+            <input type="hidden" name="product_id" value="<?=$product['id']?>">
+            <input type="number" min="1" class="form-control quantity" id="product_quantity" name="quantity" value="1">
             <button class="btn btn-success">Buy</button>
         </form>
 

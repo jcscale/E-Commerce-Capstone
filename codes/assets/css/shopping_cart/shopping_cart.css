@@ -1,0 +1,71 @@
+.logout a {
+  text-decoration: none;
+}
+.td_input_form {
+  width: 50px;
+  display: inline-block;
+}
+.td_input {
+  width: 50px;
+}
+.td_update {
+  display: inline-block;
+  cursor: pointer;
+}
+.td_delete {
+  display: inline-block;
+}
+form {
+  width: 700px;
+}
+form .text-field {
+  position: relative;
+  margin: 0px 2.5px 20px 2.5px;
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+}
+form .text-field input {
+  display: inline-block;
+  border: thin solid #fafafa;
+  color: #444;
+  background-color: #fafafa;
+  padding: 10px 10px 10px 10px;
+  border-radius: 0.25rem;
+}
+form .text-field input:focus {
+  background-color: #fff;
+}
+form .text-field label {
+  color: #999;
+  position: absolute;
+  pointer-events: none;
+  left: 10px;
+  top: 10px;
+  transition: 0.2s;
+}
+form .text-field input:focus ~ label,
+form .text-field input:not(:placeholder-shown) ~ label {
+  top: -10px;
+  left: 15px;
+  font-size: small;
+  color: gray;
+  background-color: #fff;
+  padding: 0 5px 0 5px;
+}
+form .shipping {
+  display: inline-block;
+  width: 300px;
+  vertical-align: top;
+}
+form .billing {
+  width: 300px;
+  display: inline-block;
+  margin-left: 20px;
+}
+.continue {
+  margin-left: 85%;
+}
+.continue a {
+  text-decoration: none;
+  color: white;
+}

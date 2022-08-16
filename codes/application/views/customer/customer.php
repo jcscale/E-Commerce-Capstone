@@ -54,7 +54,7 @@
                             <div class="product_img">
                                 <img src="<?=base_url()?>uploads/<?=$product['filename']?>" alt="" width="100px" height="100px">
                                 <p class="price">$<?=$product['price']?></p>
-                                <p class="product_name">T-<?=$product['name']?></p>
+                                <p class="product_name"><?=$product['name']?></p>
                             </div>
                         </a>
                     <?php }?>

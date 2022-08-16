@@ -57,12 +57,11 @@ $route['signup'] = 'users/signup';
 $route['signin'] = 'users/signin';
 $route['logout'] = 'users/logout';
 
-/////////////////// CUSTOMER ///////////////////
-$route['customers'] = 'customers';
-$route['(:any)'] = 'customers/show/$1';
+
 
 
 /////////////////// DASHBOARD ///////////////////
+$route['customers'] = 'customers';
 
 $route['dashboards'] = 'dashboards';
 $route['products'] = 'dashboards/products';
@@ -74,7 +73,11 @@ $route['update_product'] = 'dashboards/update_product';
 
 
 
-
+/////////////////// CUSTOMER ///////////////////
+$route['customers'] = 'customers';
+$route['(:any)'] = 'customers/show/$1';
+$route['cart'] = 'customers/cart';
+$route['(:any)'] = 'customers/delete_temp_order/$1';
 
 
 
