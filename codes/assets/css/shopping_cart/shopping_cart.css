@@ -16,7 +16,7 @@
   display: inline-block;
 }
 form {
-  width: 700px;
+  width: 950px;
 }
 form .text-field {
   position: relative;
@@ -61,6 +61,13 @@ form .billing {
   width: 300px;
   display: inline-block;
   margin-left: 20px;
+}
+form .pay {
+  width: 300px;
+  display: inline-block;
+  margin-left: 20px;
+  vertical-align: top;
+  margin-top: 40px;
 }
 .continue {
   margin-left: 85%;

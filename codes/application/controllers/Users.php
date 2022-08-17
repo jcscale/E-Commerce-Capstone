@@ -113,7 +113,8 @@ class Users extends CI_Controller {
         Owner: JC
     */
     public function logout() {
-        $this->session->sess_destroy();
+        // $this->session->sess_destroy();
+        $this->session->unset_userdata('user_id');
         redirect("/");
     }
 }

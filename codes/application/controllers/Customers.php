@@ -18,9 +18,20 @@ class Customers extends CI_Controller {
         $data['products'] = $this->customer->get_all_products();
         $data['categories'] = $this->customer->fetch_all_categories();
 
+        if(!empty($this->customer->count_user_temp_order())) {
+            $this->session->set_userdata('user_temp_orders', $this->customer->count_user_temp_order());
+        }
+    
         $this->load->view('templates/header');
         $this->load->view('templates/customer_nav');
         $this->load->view('customer/customer', $data);
+        $this->load->view('templates/footer');
+    }
+
+    public function setting() {
+        $this->load->view('templates/header');
+        $this->load->view('templates/customer_nav');
+        $this->load->view('customer/setting');
         $this->load->view('templates/footer');
     }
 
@@ -38,6 +49,9 @@ class Customers extends CI_Controller {
     public function cart() {
         $data['temp_orders'] = $this->customer->get_user_temp_orders();
         $data['total_temp_price'] = $this->customer->get_total_temp_order_price();
+        $data['shipping'] = $this->customer->get_shipping_info($this->session->userdata('user_id'));
+        $data['billing'] = $this->customer->get_billing_info($this->session->userdata('user_id'));
+
         $this->load->view('templates/header');
         $this->load->view('templates/customer_nav');
         $this->load->view('customer/cart', $data);
@@ -69,9 +83,68 @@ class Customers extends CI_Controller {
         redirect('customers/cart');
     }
 
-    public function ship_bill_info() {
+    public function save_setting() {
         $data = $this->input->post();
         var_dump($data);
+
+        $shipping_info = array(
+            'first_name' => $data['first_name'],
+            'last_name' => $data['last_name'],
+            'address' => $data['address'],
+            'address2' => $data['address2'],
+            'city' => $data['city'],
+            'state' => $data['state'],
+            'zip_code' => $data['zip_code'],
+            'user_id' => $this->session->userdata('user_id')
+        );
+
+        $billing_info = array(
+            'first_name' => $data['bill_first_name'],
+            'last_name' => $data['bill_last_name'],
+            'address' => $data['bill_address'],
+            'address2' => $data['bill_address2'],
+            'city' => $data['bill_city'],
+            'state' => $data['bill_state'],
+            'zip_code' => $data['bill_zip_code'],
+            'user_id' => $this->session->userdata('user_id')
+        );
+
+        $this->customer->save_shipping_info($shipping_info);
+        $this->customer->save_billing_info($billing_info);
+
+        $this->session->set_flashdata('settings_save', 'Shipping and Billing Infos saved');
+
+        redirect('customers/setting');
+        
+    }
+
+    public function handlePayment()
+    {
+        require_once('application/libraries/stripe-php/init.php');
+    
+        \Stripe\Stripe::setApiKey($this->config->item('stripe_secret'));
+     
+        \Stripe\Charge::create ([
+                "amount" => 100 * 120,
+                "currency" => "inr",
+                "source" => $this->input->post('stripeToken'),
+                "description" => "Dummy stripe payment." 
+        ]);
+
+        $info = $this->input->post();
+        
+        $data = array(
+            'total_price' => $info['total_price'],
+            'order_info' => $info['hidden_json'],
+            'user_id' => $this->session->userdata('user_id')
+        );
+
+        $this->customer->save_order($data);
+        $this->customer->delete_user_temp_orders($this->session->userdata('user_id'));
+            
+        $this->session->set_flashdata('success', 'Payment has been successful.');
+             
+        redirect('customers/cart', 'refresh');
     }
 
 }

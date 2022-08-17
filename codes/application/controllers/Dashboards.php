@@ -64,11 +64,11 @@ class Dashboards extends CI_Controller {
         Owner: JC
     */
     public function index() {
-        
-
+        $data['orders'] = $this->dashboard->fetch_all_orders();
+        // var_dump($data);
         $this->load->view('templates/header.php');
         $this->load->view('templates/admin_navbar.php');
-        $this->load->view('dashboards/dashboard');
+        $this->load->view('dashboards/dashboard', $data);
         $this->load->view('templates/footer.php');
     }
 
@@ -180,9 +180,20 @@ class Dashboards extends CI_Controller {
         else {
             print_r($this->upload->display_errors());
         }
-        
-        
-        
+           
+    }
+
+    public function show($id) {
+        $data['info'] = $this->dashboard->get_order_by_id($id);
+        // var_dump($data['info']);
+        $json_data = json_decode($data['info']['order_info'], true);
+        // var_dump($json_data); 
+        $data['json_orders'] = $json_data;
+
+        $this->load->view('templates/header.php');
+        $this->load->view('templates/admin_navbar.php');
+        $this->load->view('dashboards/order_details', $data);
+        $this->load->view('templates/footer.php');
     }
 }
 

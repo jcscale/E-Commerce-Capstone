@@ -10,7 +10,7 @@
             <a class="nav-link" href="#">Orders</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="<?=base_url()?>">Settings</a>
+            <a class="nav-link" href="<?=base_url()?>customers/setting">Settings</a>
           </li>
         </ul>
 
@@ -19,7 +19,7 @@
         </div>
 
         <div class="logout me-3">
-          <a href="<?=base_url()?>customers/cart">Shopping Cart (0)</a>
+          <a href="<?=base_url()?>customers/cart">Shopping Cart (<?=$this->session->userdata('user_temp_orders')?>)</a>
         </div>
 
         <div class="logout">

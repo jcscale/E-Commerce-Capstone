@@ -65,6 +65,30 @@ class Dashboard extends CI_Model {
         $query = $this->db->where('product_id', $product_id)->get('images')->result_array();
         return $query;
     }
+
+    public function fetch_all_orders() {
+        $this->db->select('orders.id, orders.total_price, date(orders.created_at) as created_at, users.first_name, billing_infos.address')
+        ->join('users', 'users.id = orders.user_id')
+        ->join('billing_infos', 'users.id = billing_infos.user_id')
+        ->join('shipping_infos', 'users.id = shipping_infos.user_id')
+        ->group_by('id');
+        $query = $this->db->get('orders')->result_array();
+        return $query;
+    }
+
+    public function get_order_by_id($id) {
+        $this->db->select("orders.id, orders.order_info, orders.total_price, 
+                        shipping_infos.first_name, shipping_infos.address, shipping_infos.city, shipping_infos.state, shipping_infos.zip_code,
+                        billing_infos.first_name as 'bill_first_name', billing_infos.address as 'bill_address', billing_infos.city as 'bill_city',
+                        billing_infos.state as 'bill_state', billing_infos.zip_code as 'bill_zip' ")
+        ->join('users', 'users.id = orders.user_id')
+        ->join('billing_infos', 'users.id = billing_infos.user_id')
+        ->join('shipping_infos', 'users.id = shipping_infos.user_id')
+        ->where('orders.id', $id);
+        $query = $this->db->get('orders')->result_array();
+        return $query[0];
+
+    }
 }
 
 

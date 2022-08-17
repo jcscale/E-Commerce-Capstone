@@ -70,6 +70,7 @@ $route['products'] = 'dashboards/products';
 
 $route['(:any)'] = 'dashboards/delete_product/$1';
 $route['update_product'] = 'dashboards/update_product';
+$route['(:any)'] = 'dashboards/show/$1';
 
 
 
@@ -78,6 +79,8 @@ $route['customers'] = 'customers';
 $route['(:any)'] = 'customers/show/$1';
 $route['cart'] = 'customers/cart';
 $route['(:any)'] = 'customers/delete_temp_order/$1';
+$route['setting'] = 'customers/setting';
+// $route['handlePayment']['post'] = "customers/handlePayment";
 
 
 

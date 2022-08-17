@@ -1,4 +1,5 @@
 $(document).ready(function(){
+
     $(".td_input").prop('disabled', true);
     $(".td_input").css('border', 'none');
 
@@ -12,4 +13,42 @@ $(document).ready(function(){
         $(".td_input").prop('disabled', true);
         $(".td_input").css('border', 'none');
     });
+
+
+    var $table = $("table")
+    rows = [],
+    header = [];
+
+    $table.find("thead th").each(function () {
+        header.push($(this).html());
+    });
+
+    $table.find("tbody tr").each(function () {
+        var row = {};
+        
+        $(this).find("td").each(function (i) {
+            if($(this).find('input').val()) {
+
+                var key = header[i],
+                value = $(this).find('input').val();
+                
+            } else {
+                var key = header[i],
+                value = $(this).html();
+            }  
+            
+
+
+            row[key] = value;
+        });
+        
+        rows.push(row);
+    });
+        
+    var hidden_json = JSON.stringify(rows)
+    $('input#hidden_json').val(hidden_json)
+
+
+    // console.log(JSON.stringify(rows));
+
 });
