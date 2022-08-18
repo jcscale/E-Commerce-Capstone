@@ -5,7 +5,7 @@
   <body>
 
     <div class="container mt-3">
-        
+
         <div class="row g-5">
             <div class="col-md-5">
                 <div class="shipping">
@@ -54,7 +54,7 @@
                             <div class="col">
                                 <div class="card">
                                     <div class="card-body bg-success">
-                                    <p class="card-text">Status: Shipped</p>
+                                    <p class="card-text">Status: <?=$info['status']?></p>
                                     </div>
                                 </div>
                             </div>
@@ -63,7 +63,7 @@
                                     <div class="card-body">
                                     <p class="card-text">Subtotal: $<?=$info['total_price']?></p>
                                     <p class="card-text">Shipping: $1.00</p>
-                                    <p class="card-text">Total Price: $30.98</p>
+                                    <p class="card-text">Total Price: $<?=$info['total_price']+1.00?></p>
                                     </div>
                                 </div>
                             </div>

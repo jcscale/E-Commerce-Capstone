@@ -23,7 +23,7 @@
             
         </div>
 
-        <div class="description">
+        <div class="description mb-3">
             <p>
                 <?=$product['description']?>
             </p>
@@ -39,7 +39,18 @@
         <div class="similar">
             <h2>Similar Items</h2>
             <div class="similar_img">
-                <div class="img_wrapper">
+            <?php foreach($similar_items as $similar){?>
+                <a href="<?=base_url()?>customers/show/<?=$similar['product_id']?>" class="anchor_img">
+                    <div class="img_wrapper">
+                        <img src="<?=base_url()?>/uploads/<?=$similar['filename']?>" alt="" width="100" height="100">
+                        <p class="img_price">$<?=$similar['price']?></p>
+                        <p class="img_name"><?=$similar['name']?></p>
+                    </div>
+                </a>
+                
+            <?php }?>
+                
+                <!-- <div class="img_wrapper">
                     <img src="../dashboard_products/Pocket-T-shirt_122719.webp" alt="" width="100" height="100">
                     <p class="img_price">$19.99</p>
                     <p class="img_name">T-shirt</p>
@@ -58,12 +69,7 @@
                     <img src="../dashboard_products/Pocket-T-shirt_122719.webp" alt="" width="100" height="100">
                     <p class="img_price">$19.99</p>
                     <p class="img_name">T-shirt</p>
-                </div>
-                <div class="img_wrapper">
-                    <img src="../dashboard_products/Pocket-T-shirt_122719.webp" alt="" width="100" height="100">
-                    <p class="img_price">$19.99</p>
-                    <p class="img_name">T-shirt</p>
-                </div>
+                </div> -->
                 
                 
             </div>

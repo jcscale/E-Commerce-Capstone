@@ -1,7 +1,12 @@
 <title>Dashboard</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <!-- Datatable CSS -->
+    <link href='//cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css' rel='stylesheet' type='text/css'>
+    <!-- Datatable JS -->
+    <script src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
     <link rel="stylesheet" href="<?php echo base_url();?>assets/css/dashboard_orders/dashboard_orders.css">
-    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-    <script type="text/javascript" src="<?php echo base_url();?>assets/js/script.js" charset="utf-8"></script>
+
+    <script type="text/javascript" src="<?php echo base_url();?>assets/js/dashboard/dashboard.js" charset="utf-8"></script>
   </head>
   <body>
 
@@ -11,13 +16,13 @@
             <div class="col-md-6 d-flex justify-content-start">
                 <form action="">
                     <div class="text-field">
-                        <input type="text" required class="form-control">
+                        <input type="search" required class="form-control" aria-controls="empTable" id="search_table">
                         <label>Search</label>
                     </div>
                 </form>
             </div>
             <div class="col-md-6 d-flex justify-content-end">
-                <select class="form-select status" aria-label="Default select example">
+                <select class="form-select status" aria-label="Default select example" id="status">
                     <option selected>Show All</option>
                     <option>Order in process</option>
                     <option>Shipped</option>
@@ -26,7 +31,7 @@
             </div>
         </div>
 
-        <table class="table table-striped">
+        <table id='empTable' class="table table-striped">
             <thead>
               <tr>
                 <th scope="col">Order ID</th>
@@ -57,15 +62,5 @@
               <?php }?>
             </tbody>
           </table>
-
-            <ul class="pagination d-flex justify-content-center">
-              <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-              <li class="page-item"><a class="page-link" href="#">1</a></li>
-              <li class="page-item"><a class="page-link" href="#">2</a></li>
-              <li class="page-item"><a class="page-link" href="#">3</a></li>
-              <li class="page-item"><a class="page-link" href="#">4</a></li>
-              <li class="page-item"><a class="page-link" href="#">5</a></li>
-              <li class="page-item"><a class="page-link" href="#">Next</a></li>
-            </ul>
       
   </div>

@@ -75,7 +75,12 @@ $route['(:any)'] = 'dashboards/show/$1';
 
 
 /////////////////// CUSTOMER ///////////////////
-$route['customers'] = 'customers';
+// $route['customers'] = 'customers';
+// $route['customers'] = 'customers';
+$route['(:any)'] = 'customers/$1';
+// $route['(:any)'] = 'customers/category/$1';
+// $route['(:any)/(:any)'] = 'customers/category/$1/$2';
+// $route['(:any)'] = 'customers/category/$1/$1';
 $route['(:any)'] = 'customers/show/$1';
 $route['cart'] = 'customers/cart';
 $route['(:any)'] = 'customers/delete_temp_order/$1';

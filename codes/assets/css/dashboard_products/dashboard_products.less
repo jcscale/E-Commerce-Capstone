@@ -4,6 +4,8 @@
     }
 }
 
+
+
 form {
     // width: 200px;
     .text-field {
@@ -104,23 +106,45 @@ form {
     }
 }
 
-.current {
-    padding: 3px;
-    border: 1px solid blue;
-    background-color: blue;
-    margin: 0px 3px;
-    text-decoration: none;
-    text-align: center;
-    color: white;
-    box-shadow: 2px 2px gray;
-  }
+// .current {
+//     padding: 3px;
+//     border: 1px solid blue;
+//     background-color: blue;
+//     margin: 0px 3px;
+//     text-decoration: none;
+//     text-align: center;
+//     color: white;
+//     box-shadow: 2px 2px gray;
+//   }
 
-  .digit {
-    display: inline;
-    margin: 0 3px;
-  }
-  .digit a {
-    text-decoration: none;
+//   .digit {
+//     display: inline;
+//     margin: 0 3px;
+//   }
+//   .digit a {
+//     text-decoration: none;
     
-  }
+//   }
+
+table.dataTable thead th {
+    border-bottom: 0;
+}
+table.dataTable.no-footer {
+    border-bottom: none !important;
+}
+tbody, td, tfoot, th, thead, tr {
+    border-color: inherit;
+    border-style: none !important;
+    border-width: 0;
+}
+
+.dataTables_wrapper .dataTables_paginate {
+    float: none !important;
+    text-align: center !important; 
+    padding-top: 0.25em;
+}
+
+.paginate_button {
+
+}
 

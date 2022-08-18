@@ -3,6 +3,12 @@
     <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+    
+    <!-- Datatable CSS -->
+    <link href='//cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css' rel='stylesheet' type='text/css'>
+    <!-- Datatable JS -->
+    <script src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+
     <script type="text/javascript" src="<?php echo base_url();?>assets/js/dashboard_products/dashboard_products.js" charset="utf-8"></script>
   </head>
   <body>
@@ -12,7 +18,7 @@
             <div class="col-md-6 d-flex justify-content-start">
                 <form action="">
                     <div class="text-field">
-                        <input type="text" class="form-control" placeholder=" ">
+                        <input type="text" class="form-control" placeholder=" " aria-controls="empTable" id="search_table">
                         <label>Search</label>
                     </div>
                 </form>
@@ -25,7 +31,7 @@
         </div>
 
         <div id="products">
-        <table class="table table-striped">
+        <table id='empTable' class="table table-striped">
         <thead>
             <tr>
             <th scope="col">Picture</th>

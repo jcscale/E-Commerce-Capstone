@@ -1,6 +1,27 @@
 .logout a {
   text-decoration: none;
 }
+table.dataTable thead th {
+  border-bottom: 0;
+}
+table.dataTable.no-footer {
+  border-bottom: none;
+}
+tbody,
+td,
+tfoot,
+th,
+thead,
+tr {
+  border-color: inherit;
+  border-style: none;
+  border-width: 0;
+}
+.dataTables_wrapper .dataTables_paginate {
+  float: none;
+  text-align: center;
+  padding-top: 0.25em;
+}
 form {
   width: 200px;
 }

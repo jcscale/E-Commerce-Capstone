@@ -81,3 +81,6 @@ form .text-field input:not(:placeholder-shown) ~ label {
   cursor: pointer;
   background-color: green;
 }
+.all_products .anchor_img {
+  text-decoration: none;
+}

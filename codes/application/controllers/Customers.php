@@ -15,8 +15,79 @@ class Customers extends CI_Controller {
     
     public function index() {
 
-        $data['products'] = $this->customer->get_all_products();
+        // if(!empty($this->input->get('id'))) {
+        //     $id_val = $this->input->get('id');
+        //     $data['products'] = $this->customer->search_product($id_val);
+        //     $this->load->view('templates/header');
+        //     $this->load->view('templates/customer_nav');
+        //     $this->load->view('customer/category', $data);
+        //     $this->load->view('templates/footer');
+        // }
+
+        // if(!empty($this->input->post('search_word'))) {
+        //     $search_text = $this->input->post('search_word');
+        //     var_dump($search_text);
+        // }
+
+            $search_text = '';
+            if(!empty($this->input->post('search_word'))) {
+                $search_text = $this->input->post('search_word');
+                // var_dump($search_text);
+            }
+
+        $config = array();
+        $config["base_url"] = base_url() . "customers/index";
+        $config["total_rows"] = $this->customer->get_count($search_text);
+        $config["per_page"] = 3;
+        $config["uri_segment"] = 3;
+        $config['use_page_numbers'] = TRUE;
+        
+
+        /*
+      start 
+      add boostrap class and styles
+    */
+        $config['full_tag_open'] = '<ul class="pagination d-flex justify-content-center mt-3">';        
+        $config['full_tag_close'] = '</ul>';        
+        $config['first_link'] = 'First';        
+        $config['last_link'] = 'Last';        
+        $config['first_tag_open'] = '<li class="page-item"><span class="page-link">';        
+        $config['first_tag_close'] = '</span></li>';        
+        $config['prev_link'] = '&laquo';        
+        $config['prev_tag_open'] = '<li class="page-item"><span class="page-link">';        
+        $config['prev_tag_close'] = '</span></li>';        
+        $config['next_link'] = '&raquo';        
+        $config['next_tag_open'] = '<li class="page-item"><span class="page-link">';        
+        $config['next_tag_close'] = '</span></li>';        
+        $config['last_tag_open'] = '<li class="page-item"><span class="page-link">';        
+        $config['last_tag_close'] = '</span></li>';        
+        $config['cur_tag_open'] = '<li class="page-item active"><a class="page-link" href="#">';        
+        $config['cur_tag_close'] = '</a></li>';        
+        $config['num_tag_open'] = '<li class="page-item"><span class="page-link">';        
+        $config['num_tag_close'] = '</span></li>';
+    /*
+      end 
+      add boostrap class and styles
+    */
+
+
+        $this->pagination->initialize($config);
+        $page = ($this->uri->segment(3))? $this->uri->segment(3) : 1;   
+        $data["links"] = $this->pagination->create_links();
+
+        $data['products'] = $this->customer->get_all_products($config["per_page"], $config["per_page"]*($page-1), $search_text);
+
+
+        // $data['products'] = $this->customer->get_all_products();
+
         $data['categories'] = $this->customer->fetch_all_categories();
+        $data['page'] = $page;
+
+
+        // $data['products'] = $this->customer->get_all_products();
+
+        // var_dump($data);
+
 
         if(!empty($this->customer->count_user_temp_order())) {
             $this->session->set_userdata('user_temp_orders', $this->customer->count_user_temp_order());
@@ -28,16 +99,103 @@ class Customers extends CI_Controller {
         $this->load->view('templates/footer');
     }
 
-    public function setting() {
+    public function category($category_id) {
+
+        $search_text = '';
+            if(!empty($this->input->post('search_word'))) {
+                $search_text = $this->input->post('search_word');
+                // var_dump($search_text);
+            }
+            
+        $config = array();
+        $config["base_url"] = base_url() . "customers/category/$category_id";
+        $config["total_rows"] = $this->customer->category_count($category_id, $search_text);
+        $config["per_page"] = 2;
+        $config["uri_segment"] = 4;
+        $config['use_page_numbers'] = TRUE;
+        
+        /*
+        start 
+        add boostrap class and styles
+        */
+        $config['full_tag_open'] = '<ul class="pagination d-flex justify-content-center mt-3">';        
+        $config['full_tag_close'] = '</ul>';        
+        $config['first_link'] = 'First';        
+        $config['last_link'] = 'Last';        
+        $config['first_tag_open'] = '<li class="page-item"><span class="page-link">';        
+        $config['first_tag_close'] = '</span></li>';        
+        $config['prev_link'] = '&laquo';        
+        $config['prev_tag_open'] = '<li class="page-item"><span class="page-link">';        
+        $config['prev_tag_close'] = '</span></li>';        
+        $config['next_link'] = '&raquo';        
+        $config['next_tag_open'] = '<li class="page-item"><span class="page-link">';        
+        $config['next_tag_close'] = '</span></li>';        
+        $config['last_tag_open'] = '<li class="page-item"><span class="page-link">';        
+        $config['last_tag_close'] = '</span></li>';        
+        $config['cur_tag_open'] = '<li class="page-item active"><a class="page-link" href="#">';        
+        $config['cur_tag_close'] = '</a></li>';        
+        $config['num_tag_open'] = '<li class="page-item"><span class="page-link">';        
+        $config['num_tag_close'] = '</span></li>';
+        /*
+        end 
+        add boostrap class and styles
+        */
+
+        $this->pagination->initialize($config);
+        $page = ($this->uri->segment(4))? $this->uri->segment(4) : 1;   
+        $data["links"] = $this->pagination->create_links();
+
+        // $data['products'] = $this->customer->get_all_products($config["per_page"], $page);
+
+        // var_dump($category_id);
+        // var_dump($this->customer->category_count($category_id));
+        
+
+        $data['categories'] = $this->customer->fetch_all_categories();
+
+
+        $data['products'] = $this->customer->filter_by_category($category_id, $config["per_page"], $config["per_page"]*($page-1), $search_text);
+        $data['page'] = $page;
+
+        if(!empty($this->customer->count_user_temp_order())) {
+            $this->session->set_userdata('user_temp_orders', $this->customer->count_user_temp_order());
+        }
+    
         $this->load->view('templates/header');
         $this->load->view('templates/customer_nav');
-        $this->load->view('customer/setting');
+        $this->load->view('customer/category', $data);
         $this->load->view('templates/footer');
+    }
+
+
+
+    public function setting() {
+        if(!empty($this->customer->count_user_temp_order())) {
+            $this->session->set_userdata('user_temp_orders', $this->customer->count_user_temp_order());
+        }
+        $data['shipping'] = $this->customer->get_shipping_info($this->session->userdata('user_id'));
+        $data['billing'] = $this->customer->get_billing_info($this->session->userdata('user_id'));
+        
+        $this->load->view('templates/header');
+        $this->load->view('templates/customer_nav');
+        $this->load->view('customer/setting', $data);
+        $this->load->view('templates/footer');
+    }
+
+    public function update_setting() {
+        $info = $this->input->post();
+        var_dump($info);
     }
 
     public function show($id) {
         $data['product'] = $this->customer->product_detail($id);
         $data['images'] = $this->customer->fetch_images($id);
+        $data['similar_items'] = $this->customer->similar_items($id, $data['product']['category_id']);
+        // var_dump($data['similar_items']);
+
+        if(!empty($this->customer->count_user_temp_order())) {
+            $this->session->set_userdata('user_temp_orders', $this->customer->count_user_temp_order());
+        }
         // var_dump($data);
         $this->load->view('templates/header');
         $this->load->view('templates/customer_nav');
@@ -51,6 +209,10 @@ class Customers extends CI_Controller {
         $data['total_temp_price'] = $this->customer->get_total_temp_order_price();
         $data['shipping'] = $this->customer->get_shipping_info($this->session->userdata('user_id'));
         $data['billing'] = $this->customer->get_billing_info($this->session->userdata('user_id'));
+
+        if(!empty($this->customer->count_user_temp_order())) {
+            $this->session->set_userdata('user_temp_orders', $this->customer->count_user_temp_order());
+        }
 
         $this->load->view('templates/header');
         $this->load->view('templates/customer_nav');
@@ -136,11 +298,13 @@ class Customers extends CI_Controller {
         $data = array(
             'total_price' => $info['total_price'],
             'order_info' => $info['hidden_json'],
-            'user_id' => $this->session->userdata('user_id')
+            'user_id' => $this->session->userdata('user_id'),
+            'order_status_id' => 3
         );
 
         $this->customer->save_order($data);
         $this->customer->delete_user_temp_orders($this->session->userdata('user_id'));
+        $this->session->unset_userdata('user_temp_orders');
             
         $this->session->set_flashdata('success', 'Payment has been successful.');
              

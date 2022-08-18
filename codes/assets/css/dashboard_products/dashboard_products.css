@@ -76,20 +76,24 @@ form .text-field textarea:not(:placeholder-shown) ~ label {
   position: absolute;
   margin-left: -1.3em;
 }
-.current {
-  padding: 3px;
-  border: 1px solid blue;
-  background-color: blue;
-  margin: 0px 3px;
-  text-decoration: none;
-  text-align: center;
-  color: white;
-  box-shadow: 2px 2px gray;
+table.dataTable thead th {
+  border-bottom: 0;
 }
-.digit {
-  display: inline;
-  margin: 0 3px;
+table.dataTable.no-footer {
+  border-bottom: none !important;
 }
-.digit a {
-  text-decoration: none;
+tbody,
+td,
+tfoot,
+th,
+thead,
+tr {
+  border-color: inherit;
+  border-style: none !important;
+  border-width: 0;
+}
+.dataTables_wrapper .dataTables_paginate {
+  float: none !important;
+  text-align: center !important;
+  padding-top: 0.25em;
 }

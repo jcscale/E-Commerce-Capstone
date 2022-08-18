@@ -36,9 +36,9 @@
 }
 .container .similar_img .img_wrapper {
   display: inline-block;
-}
-.container .similar_img .img_wrapper img {
   background-color: lightyellow;
+  width: 100px;
+  height: 100px;
 }
 .container .similar_img .img_wrapper .img_price {
   position: relative;
@@ -52,4 +52,10 @@
   position: relative;
   bottom: 25px;
   margin-bottom: 0px;
+}
+.container .similar_img .img_wrapper:hover {
+  background-color: green;
+}
+.container .similar_img .anchor_img {
+  text-decoration: none;
 }
