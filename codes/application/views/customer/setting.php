@@ -13,8 +13,14 @@
     <div class="container mt-3">
 
         <?php if($this->session->flashdata('settings_save')){?>
-            <div class="settings_save">
-                <p class="bg-success">Success</p>
+            <div class="alert alert-success" role="alert">
+                Settings Saved
+            </div>
+        <?php }?>
+
+        <?php if($this->session->flashdata('update_success')){?>
+            <div class="alert alert-success" role="alert">
+               Updated Successfully
             </div>
         <?php }?>
 

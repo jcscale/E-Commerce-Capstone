@@ -183,8 +183,37 @@ class Customers extends CI_Controller {
     }
 
     public function update_setting() {
-        $info = $this->input->post();
-        var_dump($info);
+        $data = $this->input->post();
+        
+        $shipping_info = array(
+            'first_name' => $data['first_name'],
+            'last_name' => $data['last_name'],
+            'address' => $data['address'],
+            'address2' => $data['address2'],
+            'city' => $data['city'],
+            'state' => $data['state'],
+            'zip_code' => $data['zip_code']
+        );
+
+        $billing_info = array(
+            'first_name' => $data['bill_first_name'],
+            'last_name' => $data['bill_last_name'],
+            'address' => $data['bill_address'],
+            'address2' => $data['bill_address2'],
+            'city' => $data['bill_city'],
+            'state' => $data['bill_state'],
+            'zip_code' => $data['bill_zip_code']
+        );
+
+        $this->customer->update_shipping_info($this->session->userdata('user_id'), $shipping_info);
+        $this->customer->update_billing_info($this->session->userdata('user_id'), $billing_info);
+
+        $this->session->set_flashdata('update_success', 'Update Success');
+
+        redirect('customers/setting');
+        
+
+
     }
 
     public function show($id) {
@@ -309,6 +338,31 @@ class Customers extends CI_Controller {
         $this->session->set_flashdata('success', 'Payment has been successful.');
              
         redirect('customers/cart', 'refresh');
+    }
+
+    public function order() {
+        if(!empty($this->customer->count_user_temp_order())) {
+            $this->session->set_userdata('user_temp_orders', $this->customer->count_user_temp_order());
+        }
+        
+        $data['orders'] = $this->customer->get_customer_orders($this->session->userdata('user_id'));
+        $json_data = json_decode($data['orders'][0]['order_info'], true);
+        $data['json_orders'] = $json_data;
+        // var_dump($data['json_orders']);
+
+        $i=0;
+        $data2 = [];
+        foreach(json_decode($data['orders'][$i]['order_info'], true) as $order) {
+            $data2[] = $order;
+        }
+
+        // var_dump( $data2);
+        
+        $data['customer_items'] = $data2;
+        $this->load->view('templates/header');
+        $this->load->view('templates/customer_nav');
+        $this->load->view('customer/order', $data);
+        $this->load->view('templates/footer');
     }
 
 }

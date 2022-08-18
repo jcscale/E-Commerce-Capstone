@@ -85,6 +85,7 @@ $route['(:any)'] = 'customers/show/$1';
 $route['cart'] = 'customers/cart';
 $route['(:any)'] = 'customers/delete_temp_order/$1';
 $route['setting'] = 'customers/setting';
+$route['order'] = 'customers/order';
 // $route['handlePayment']['post'] = "customers/handlePayment";
 
 

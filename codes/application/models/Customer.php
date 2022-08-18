@@ -168,8 +168,16 @@ class Customer extends CI_Model {
     }
 
 
-    public function update_user_info($user_id) {
+    public function update_shipping_info($user_id, $data) {
+        $this->db->where('user_id', $user_id);
+        $query = $this->db->update('shipping_infos', $data);
+        return $query;
+    }
 
+    public function update_billing_info($user_id, $data) {
+        $this->db->where('user_id', $user_id);
+        $query = $this->db->update('billing_infos', $data);
+        return $query;
     }
 
     public function get_shipping_info($id) {
@@ -188,6 +196,11 @@ class Customer extends CI_Model {
     }
 
 
+    public function get_customer_orders($user_id) {
+        $this->db->where('user_id', $user_id);
+        $query = $this->db->get('orders')->result_array();
+        return $query;
+    }
 
 }
 
