@@ -100,11 +100,12 @@ class Customer extends CI_Model {
     }
 
     public function similar_items($id, $category_id) {
-        $this->db->select("*")
+        $this->db->select("product_id, filename, price, products.name as name")
         ->join('images', 'images.product_id = products.id')
         ->join('categories', 'categories.id = products.category_id')
         ->where('products.id !=', $id)
-        ->where('category_id', $category_id);
+        ->where('category_id', $category_id)
+        ->group_by('product_id');
         $query = $this->db->get("products")->result_array();
         return $query;
     }

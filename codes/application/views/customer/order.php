@@ -7,13 +7,15 @@
     <link rel="stylesheet" href="<?php echo base_url();?>assets/css/dashboard_orders/dashboard_orders.css">
 
     <script type="text/javascript" src="<?php echo base_url();?>assets/js/dashboard/dashboard.js" charset="utf-8"></script>
+
+
   </head>
   <body>
 
   <div class="container mt-3">
 
   <h3>Order History</h3>
-    <div class="row">
+    <div class="row ms-3">
         <?php foreach($orders as $order){?>
             <div class="card mt-3 me-3 alert-primary pb-2" style="width: 18rem;">
                 <div class="card-header">

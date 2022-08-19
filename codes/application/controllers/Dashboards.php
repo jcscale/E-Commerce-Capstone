@@ -91,99 +91,50 @@ class Dashboards extends CI_Controller {
     }
 
     public function add_product() {
+
+        $config['allowed_types'] = 'png|jpg|jpeg|webp';
+        $config['upload_path'] = './uploads/';
+        $this->load->library('upload', $config);
+
         $product = $this->input->post();
+        // var_dump($product);
+        if($this->upload->do_upload('image')) {
+            $filename = $this->upload->data();
 
+            $data = array(
+                'name' => $product['name'],
+                'description' => $product['description'],
+                'price' => $product['price'],
+                'inventory_count' => $product['inventory_count'],
+                'quantity_sold' => $product['quantity_sold'],
+                'category_id' => $product['category_id']
+            );
+
+            $this->dashboard->add_product($data);
+            $id = $this->dashboard->get_product_by_name($data['name']);
+            
+            $file_data = array(
+                'filename' => $filename['file_name'],
+                'product_id' => $id['id']
+            );
+
+            $this->dashboard->product_image($file_data);
+
+            redirect('products');
+        }
+        else {
+            print_r($this->upload->display_errors());
+        }
+    }
+
+    public function add_category() {
+        $category_name = $this->input->post('category');
+        var_dump($category_name);
         $data = array(
-            'name' => $product['name'],
-            'description' => $product['description'],
-            'price' => $product['price'],
-            'inventory_count' => $product['inventory_count'],
-            'quantity_sold' => $product['quantity_sold'],
-            'category_id' => $product['category_id']
-        );  
-     
-        $count = count($_FILES['files']['name']);  
-
-        for($i=0;$i<$count;$i++){  
-      
-            if(!empty($_FILES['files']['name'][$i])){  
-          
-                $_FILES['file']['name'] = $_FILES['files']['name'][$i];  
-                $_FILES['file']['type'] = $_FILES['files']['type'][$i];  
-                $_FILES['file']['tmp_name'] = $_FILES['files']['tmp_name'][$i];  
-                $_FILES['file']['error'] = $_FILES['files']['error'][$i];  
-                $_FILES['file']['size'] = $_FILES['files']['size'][$i];  
-            
-                $config['upload_path'] = 'uploads/';   
-                $config['allowed_types'] = 'jpg|jpeg|png|gif';  
-                $config['max_size'] = '5000';  
-                $config['file_name'] = $_FILES['files']['name'][$i];  
-            
-                $this->load->library('upload',$config);   
-            
-                if($this->upload->do_upload('image')){  
-                    $uploadData = $this->upload->data();  
-                    $filename = $uploadData['file_name'];  
-
-                    
-            
-                    $data['totalFiles'][] = $filename;  
-                }  
-                else {
-                    print_r($this->upload->display_errors());
-                }
-            }  
-         
-        }  
-
-        $this->dashboard->add_product($data);
-        $id = $this->dashboard->get_product_by_name($data['name']);
-
-        $file_data = array(
-            'filename' => $data['totalFiles'],
-            'product_id' => $id['id']
+            'name' =>$category_name
         );
-
-        $this->dashboard->product_image($file_data);
-
-        redirect('products');
-
-
-
-
-        // $config['allowed_types'] = 'png|jpg|jpeg';
-        // $config['upload_path'] = './uploads/';
-        // $this->load->library('upload', $config);
-
-        // $product = $this->input->post();
-        // // var_dump($product);
-        // if($this->upload->do_upload('image')) {
-        //     $filename = $this->upload->data();
-
-        //     $data = array(
-        //         'name' => $product['name'],
-        //         'description' => $product['description'],
-        //         'price' => $product['price'],
-        //         'inventory_count' => $product['inventory_count'],
-        //         'quantity_sold' => $product['quantity_sold'],
-        //         'category_id' => $product['category_id']
-        //     );
-
-        //     $this->dashboard->add_product($data);
-        //     $id = $this->dashboard->get_product_by_name($data['name']);
-            
-        //     $file_data = array(
-        //         'filename' => $filename['file_name'],
-        //         'product_id' => $id['id']
-        //     );
-
-        //     $this->dashboard->product_image($file_data);
-
-        //     redirect('products');
-        // }
-        // else {
-        //     print_r($this->upload->display_errors());
-        // }
+        $this->dashboard->add_category($data);
+        redirect('dashboards/products');
     }
 
 

@@ -31,7 +31,7 @@
         </div>
 
         <div id="products">
-        <table id='empTable' class="table table-striped">
+        <table id='empTable' class="table table-striped table-hover">
         <thead>
             <tr>
             <th scope="col">Picture</th>
@@ -106,16 +106,20 @@
                             <label>Quantity Sold</label>
                         </div>
                         
-                        <div class="text-field mb-3">
-                        <input type="text" placeholder=" " class="form-control" name="category">
-                        <label>Add new category</label>
-                        </div>
+                        <form action="dashboards/add_category" method="POST" id="add_category_form">
+                            <div class="text-field mb-3">
+                                <input type="text" placeholder=" " class="form-control" name="category" form="add_category_form" id="add_new_category">
+                                <!-- <button type="submit" form="add_category_form">Submit</button> -->
+                                <label>Add new category</label>
+                            </div>
+                        </form> 
+                       
 
                         <p>Categories:</p>
                         <div class="text-field mb-3">
                             <div class="dropdown">
                                 <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                                Tshirts
+                                Consumables
                                 </button>
                                 <input type="hidden" value="1" id="hide_id" class="hide_id" name="category_id" form="add_product_form">
                                 

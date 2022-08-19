@@ -6,7 +6,7 @@ $(document).ready(function(){
         "ordering": false,    // Ordering (Sorting on Each Column)will Be Disabled
         "info": false,         // Will show "1 to n of n entries" Text at bottom
         "lengthChange": false, // Will Disabled Record number per page
-        "pageLength": 2
+        "pageLength": 10
         
     });
 
@@ -116,6 +116,20 @@ $(document).ready(function(){
         });
     });
 
-    
+        // $("#search_word").blur(function() {
+    //     // console.log($(this).parent().parent().attr('action'))
+    //     $.post($(this).parent().parent().attr('action'), $(this).parent().parent().serialize(), function(data) {
+    //         console.log(data);
+    //         $('.product_list').html(data)
+    //     })
+    // });
+
+    // console.log('ready')
+    // $("#add_new_category").blur(function(){
+    //     var form = $(this).parent().parent()
+    //     $.post(form.attr('action'), form.serialize(), function(data) {
+    //         console.log(data)
+    //     })
+    // });
 
 });

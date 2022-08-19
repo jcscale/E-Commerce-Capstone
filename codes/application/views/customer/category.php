@@ -34,7 +34,7 @@
                         <div class="col-md-3">
                             <nav aria-label="Page navigation example">
                                 <ul class="pagination sm d-flex justify-content-end ">
-                                    <p><?=$links?></p>
+                                    <!-- <p><?=$links?></p> -->
                                   <!-- <li class="page-item disabled">
                                     <span class="page-link">Previous</span>
                                   </li>

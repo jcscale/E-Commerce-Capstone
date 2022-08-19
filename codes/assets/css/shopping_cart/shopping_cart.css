@@ -1,3 +1,6 @@
+body {
+  background: url('dota2.webp');
+}
 .logout a {
   text-decoration: none;
 }
@@ -14,6 +17,10 @@
 }
 .td_delete {
   display: inline-block;
+}
+.container {
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  background-color: white;
 }
 form {
   width: 950px;

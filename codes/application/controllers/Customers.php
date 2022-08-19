@@ -38,7 +38,7 @@ class Customers extends CI_Controller {
         $config = array();
         $config["base_url"] = base_url() . "customers/index";
         $config["total_rows"] = $this->customer->get_count($search_text);
-        $config["per_page"] = 3;
+        $config["per_page"] = 10;
         $config["uri_segment"] = 3;
         $config['use_page_numbers'] = TRUE;
         
@@ -110,7 +110,7 @@ class Customers extends CI_Controller {
         $config = array();
         $config["base_url"] = base_url() . "customers/category/$category_id";
         $config["total_rows"] = $this->customer->category_count($category_id, $search_text);
-        $config["per_page"] = 2;
+        $config["per_page"] = 10;
         $config["uri_segment"] = 4;
         $config['use_page_numbers'] = TRUE;
         
@@ -276,7 +276,7 @@ class Customers extends CI_Controller {
 
     public function save_setting() {
         $data = $this->input->post();
-        var_dump($data);
+        // var_dump($data);
 
         $shipping_info = array(
             'first_name' => $data['first_name'],

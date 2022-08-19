@@ -33,6 +33,11 @@ class Dashboard extends CI_Model {
         return $query;
     }
 
+    public function add_category($name) {
+        $query = $this->db->insert('categories', $name);
+        return $query;
+    }
+
     public function product_image($filename) {
         $query = $this->db->insert('images', $filename);
         return $query;

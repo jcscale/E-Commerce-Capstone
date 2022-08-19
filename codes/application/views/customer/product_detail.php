@@ -16,9 +16,9 @@
                     <img src="<?=base_url()?>uploads/<?=$image['filename']?>" alt="" width="220" height="200">
                 <?php } else {?>
                     <div class="img-list">
-                        <img src="<?=base_url()?>uploads/<?=$image['filename']?>" alt="" width="50" height="50">
+                        <img src="<?=base_url()?>uploads/<?=$image['filename']?>" alt="" width="50" height="50" class="mini_images">
                     </div>
-                    <?php }?>
+                <?php }?>
             <?php }?>
             
         </div>

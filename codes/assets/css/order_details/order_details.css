@@ -1,5 +1,13 @@
+body {
+  background: url('../product_details/dota2.webp');
+}
 .logout a {
   text-decoration: none;
+}
+.container {
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  background-color: white;
+  padding: 10px;
 }
 .shipping {
   padding: 10px 20px;

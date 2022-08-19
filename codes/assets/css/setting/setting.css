@@ -15,6 +15,11 @@
 .td_delete {
   display: inline-block;
 }
+.container {
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  background-color: white;
+  padding: 10px;
+}
 form {
   width: 700px;
 }

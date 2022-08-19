@@ -1,3 +1,7 @@
+body {
+    background: url('dota2.webp');
+}
+
 .logout {
     a {
         text-decoration: none;
@@ -6,29 +10,44 @@
 
 
 .container {
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    background-color: white;
+    // background: linear-gradient(rgba(255,255,255,.9), rgba(255,255,255,.9));
 
     .product_img {
         img {
             background-color: lightyellow;
             margin-bottom: 3px;
             border: 1px solid black;
+            box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+            display: block;
         }
         .img-list {
             text-align: center;
+            width: 50px;
+            height: 50px;
+            display: inline-block;
+
+            .mini_images {
+                display: inline-block;
+            }
         }
     }
 
     .product_img, .description {
         display: inline-block;
+        background-color: white;
+        // background: linear-gradient(rgba(255,255,255,.9), rgba(255,255,255,.9));
     }
     
     .description {
         vertical-align: top;
         width:80%;
         height: 250px;
-        border: 1px solid black;
+        // border: 1px solid black;
         padding: 10px;
         margin-left: 20px;
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     }
 
     .quantity {
@@ -50,10 +69,22 @@
     .similar_img {
 
         .img_wrapper {
-            display: inline-block;
+            // display: inline-block;
+            // background-color: lightyellow;
+            // width: 120px;
+            // height: 170px;
+            // vertical-align: top;
+
+            width: 120px;
+            height: 170px;
             background-color: lightyellow;
-            width: 100px;
-            height: 100px;
+            display: inline-block;
+            margin: 10px 10px;
+            vertical-align: top;
+            padding: 10px;
+            text-align: center;
+            border-radius: 3px;
+            box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 
             // img {
             //     background-color: lightyellow;
