@@ -12,19 +12,20 @@
 
     <div class="container mt-3">
 
-        <?php if($this->session->flashdata('settings_save')){?>
+        
+        <?php if(!empty($shipping)){?>
+            <?php if($this->session->flashdata('settings_save')){?>
             <div class="alert alert-success" role="alert">
                 Settings Saved
             </div>
-        <?php }?>
+            <?php }?>
 
-        <?php if($this->session->flashdata('update_success')){?>
-            <div class="alert alert-success" role="alert">
-               Updated Successfully
-            </div>
-        <?php }?>
+            <?php if($this->session->flashdata('update_success')){?>
+                <div class="alert alert-success" role="alert">
+                Updated Successfully
+                </div>
+            <?php }?>
 
-        <?php if(!empty($shipping)){?>
             <form action="<?=base_url()?>customers/update_setting" method="post"
                 class="form-validation" data-cc-on-file="false"
                 data-stripe-publishable-key="<?php echo $this->config->item('stripe_key') ?>"

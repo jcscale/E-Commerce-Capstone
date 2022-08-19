@@ -14,12 +14,14 @@
 
   <div class="container mt-3">
 
-  <h3>Order History</h3>
+  
+  <?php if(!empty($orders)){?>
+    <h3 class="text-center">Order History</h3>
     <div class="row ms-3">
         <?php foreach($orders as $order){?>
             <div class="card mt-3 me-3 alert-primary pb-2" style="width: 18rem;">
                 <div class="card-header">
-                    Total amount: <?=$order['total_price']?>
+                    Total amount: $<?=$order['total_price']?>
                 </div>
                 <?php foreach($customer_items as $val){?>
                     <ul class="list-group list-group-flush">
@@ -32,5 +34,9 @@
             </div>
         <?php }?>
     </div>
+  <?php } else {?>
+    <h3 class="text-center">No orders available</h3>
+    <?php }?>
+   
       
   </div>

@@ -9,7 +9,7 @@
 <div class="container mt-3">
     <div class="error"><?=$this->session->flashdata('input_errors');?></div>
 
-    <form action="users/process_signup" method="POST">
+    <form action="<?=base_url()?>users/process_signup" method="POST">
         <h3>Sign Up</h3>
         <div class="text-field">
             <input type="text" placeholder=" " class="form-control" name="first_name">

@@ -38,7 +38,7 @@ class Customers extends CI_Controller {
         $config = array();
         $config["base_url"] = base_url() . "customers/index";
         $config["total_rows"] = $this->customer->get_count($search_text);
-        $config["per_page"] = 10;
+        $config["per_page"] = 12;
         $config["uri_segment"] = 3;
         $config['use_page_numbers'] = TRUE;
         
@@ -89,8 +89,9 @@ class Customers extends CI_Controller {
         // var_dump($data);
 
 
-        if(!empty($this->customer->count_user_temp_order())) {
-            $this->session->set_userdata('user_temp_orders', $this->customer->count_user_temp_order());
+        if(!empty($this->customer->count_user_temp_order($this->session->userdata('user_id')))) {
+            $data['user_temp_orders'] = $this->customer->count_user_temp_order($this->session->userdata('user_id'));
+            $this->session->set_userdata('user_temp_orders', $data['user_temp_orders']);
         }
     
         $this->load->view('templates/header');
@@ -110,7 +111,7 @@ class Customers extends CI_Controller {
         $config = array();
         $config["base_url"] = base_url() . "customers/category/$category_id";
         $config["total_rows"] = $this->customer->category_count($category_id, $search_text);
-        $config["per_page"] = 10;
+        $config["per_page"] = 12;
         $config["uri_segment"] = 4;
         $config['use_page_numbers'] = TRUE;
         
@@ -157,9 +158,10 @@ class Customers extends CI_Controller {
         $data['products'] = $this->customer->filter_by_category($category_id, $config["per_page"], $config["per_page"]*($page-1), $search_text);
         $data['page'] = $page;
 
-        if(!empty($this->customer->count_user_temp_order())) {
-            $this->session->set_userdata('user_temp_orders', $this->customer->count_user_temp_order());
-        }
+        // if(!empty($this->customer->count_user_temp_order($this->session->userdata('user_id')))) {
+        //     // $this->session->set_userdata('user_temp_orders', $this->customer->count_user_temp_order());
+        //     $data['user_temp_orders'] = $this->customer->count_user_temp_order($this->session->userdata('user_id'));
+        // }
     
         $this->load->view('templates/header');
         $this->load->view('templates/customer_nav');
@@ -170,9 +172,11 @@ class Customers extends CI_Controller {
 
 
     public function setting() {
-        if(!empty($this->customer->count_user_temp_order())) {
-            $this->session->set_userdata('user_temp_orders', $this->customer->count_user_temp_order());
-        }
+        // if(!empty($this->customer->count_user_temp_order($this->session->userdata('user_id')))) {
+        //     // $this->session->set_userdata('user_temp_orders', $this->customer->count_user_temp_order());
+        //     $data['user_temp_orders'] = $this->customer->count_user_temp_order($this->session->userdata('user_id'));
+        // }
+
         $data['shipping'] = $this->customer->get_shipping_info($this->session->userdata('user_id'));
         $data['billing'] = $this->customer->get_billing_info($this->session->userdata('user_id'));
         
@@ -222,8 +226,9 @@ class Customers extends CI_Controller {
         $data['similar_items'] = $this->customer->similar_items($id, $data['product']['category_id']);
         // var_dump($data['similar_items']);
 
-        if(!empty($this->customer->count_user_temp_order())) {
-            $this->session->set_userdata('user_temp_orders', $this->customer->count_user_temp_order());
+        if(!empty($this->customer->count_user_temp_order($this->session->userdata('user_id')))) {
+            $data['user_temp_orders'] = $this->customer->count_user_temp_order($this->session->userdata('user_id'));
+            $this->session->set_userdata('user_temp_orders', $data['user_temp_orders']);
         }
         // var_dump($data);
         $this->load->view('templates/header');
@@ -235,13 +240,17 @@ class Customers extends CI_Controller {
 
     public function cart() {
         $data['temp_orders'] = $this->customer->get_user_temp_orders();
-        $data['total_temp_price'] = $this->customer->get_total_temp_order_price();
+        $data['total_temp_price'] = $this->customer->get_total_temp_order_price($this->session->userdata('user_id'));
         $data['shipping'] = $this->customer->get_shipping_info($this->session->userdata('user_id'));
         $data['billing'] = $this->customer->get_billing_info($this->session->userdata('user_id'));
 
-        if(!empty($this->customer->count_user_temp_order())) {
-            $this->session->set_userdata('user_temp_orders', $this->customer->count_user_temp_order());
-        }
+        // if(!empty($this->customer->count_user_temp_order($this->session->userdata('user_id')))) {
+            
+        //     $data['user_temp_orders'] = $this->customer->count_user_temp_order($this->session->userdata('user_id'));
+        //     $this->session->set_userdata('user_temp_orders', $data['user_temp_orders']);      
+        // }
+
+        // var_dump($data['user_temp_orders']);
 
         $this->load->view('templates/header');
         $this->load->view('templates/customer_nav');
@@ -341,20 +350,24 @@ class Customers extends CI_Controller {
     }
 
     public function order() {
-        if(!empty($this->customer->count_user_temp_order())) {
-            $this->session->set_userdata('user_temp_orders', $this->customer->count_user_temp_order());
-        }
+        // if(!empty($this->customer->count_user_temp_order($this->session->userdata('user_id')))) {
+        //     // $this->session->set_userdata('user_temp_orders', $this->customer->count_user_temp_order());
+        //     $data['user_temp_orders'] = $this->customer->count_user_temp_order($this->session->userdata('user_id'));
+        // }
         
         $data['orders'] = $this->customer->get_customer_orders($this->session->userdata('user_id'));
-        $json_data = json_decode($data['orders'][0]['order_info'], true);
-        $data['json_orders'] = $json_data;
-        // var_dump($data['json_orders']);
+        // $json_data = json_decode($data['orders'][0]['order_info'], true);
+        // $data['json_orders'] = $json_data;
+        // var_dump($data['orders']);
 
         $i=0;
         $data2 = [];
-        foreach(json_decode($data['orders'][$i]['order_info'], true) as $order) {
-            $data2[] = $order;
+        if(!empty($data['orders'])) {
+            foreach(json_decode($data['orders'][$i]['order_info'], true) as $order) {
+                $data2[] = $order;
+            }
         }
+        
 
         // var_dump( $data2);
         

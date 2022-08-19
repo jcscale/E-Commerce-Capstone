@@ -19,7 +19,12 @@
         </div>
 
         <div class="logout me-3">
-          <a href="<?=base_url()?>customers/cart">Shopping Cart (<?=$this->session->userdata('user_temp_orders')?>)</a>
+          <?php if(!empty($this->session->userdata('user_temp_orders'))){?>
+            <a href="<?=base_url()?>customers/cart">Shopping Cart (<?=$this->session->userdata('user_temp_orders')?>)</a>
+          <?php } else {?>
+            <a href="<?=base_url()?>customers/cart">Shopping Cart (0)</a>
+            <?php }?>
+          
         </div>
 
         <div class="logout">

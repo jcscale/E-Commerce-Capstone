@@ -208,7 +208,7 @@
                         <div class="text-field mb-3">
                             <div class="dropdown">
                                 <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                                Tshirts
+                                Consumable
                                 </button>
                                 <input type="hidden" value="1" id="hide_id" class="hide_id" name="category_id" form="edit_product_form">
                                 

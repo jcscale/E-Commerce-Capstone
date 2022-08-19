@@ -45,7 +45,6 @@ form .text-field input:not(:placeholder-shown) ~ label {
 .all_products {
   width: 100%;
   padding: 20px;
-  border: 1px solid #ced4da;
   border-radius: 0.25rem;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   background-color: white;

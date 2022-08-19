@@ -1,3 +1,3 @@
 # E-COMMERCE ERD
 
-![ERD](e-commerce.png)
+![ERD](final-erd.png)

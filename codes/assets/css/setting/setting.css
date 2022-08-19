@@ -1,3 +1,6 @@
+body {
+  background: url('dota2.webp');
+}
 .logout a {
   text-decoration: none;
 }

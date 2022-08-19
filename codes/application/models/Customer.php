@@ -129,8 +129,9 @@ class Customer extends CI_Model {
         return $query;
     }
 
-    public function get_total_temp_order_price() {
-        $this->db->select("sum(total_price) as total_temp_price")
+    public function get_total_temp_order_price($id) {
+        $this->db->select("sum(total_price) as total_temp_price, users_id")
+        ->where('users_id', $id)
         ->group_by('users_id');
         $query = $this->db->get('temp_orders')->result_array();
         if(!empty($query)){
@@ -138,12 +139,22 @@ class Customer extends CI_Model {
         }
     }
 
-    public function count_user_temp_order() {
-        $this->db->where('id', $this->session->userdata('user_id'));
-        $query = $this->db->count_all('temp_orders');
+    public function count_user_temp_order($user_id) {
+        // $this->output->enable_profiler(TRUE);
+        $this->db->select("count(*) as count_all_records");
+        $this->db->from('temp_orders');
+        $this->db->where('users_id', $user_id);
+        $query = $this->db->get()->result_array();
+
         if(!empty($query)) {
-            return $query;
+            return $query[0]['count_all_records'];
+        } else {
+            return null;
         }
+
+       
+        // var_dump($query);
+        
     }
 
     public function delete_temp_order($id) {
@@ -182,13 +193,28 @@ class Customer extends CI_Model {
     }
 
     public function get_shipping_info($id) {
-        $query = $this->db->where('user_id', $id)->get('shipping_infos')->result_array();
-        return $query[0];
+        $query = $this->db->where('user_id', $id)->get('shipping_infos');
+
+        if($query->num_rows()>0) {
+            return $query->result_array()[0];
+        }
+        else {
+            return null;
+        }
+        // return $query[0];
     }
 
     public function get_billing_info($id) {
-        $query = $this->db->where('user_id', $id)->get('billing_infos')->result_array();
-        return $query[0];
+        $query = $this->db->where('user_id', $id)->get('billing_infos');
+
+        if($query->num_rows()>0) {
+            return $query->result_array()[0];
+        }
+        else {
+            return null;
+        }
+        // return $query[0];
+        // return $query[0];
     }
 
     public function save_order($data) {
@@ -199,8 +225,14 @@ class Customer extends CI_Model {
 
     public function get_customer_orders($user_id) {
         $this->db->where('user_id', $user_id);
-        $query = $this->db->get('orders')->result_array();
-        return $query;
+        $query = $this->db->get('orders');
+        
+        if($query->num_rows()>0) {
+            return $query->result_array();
+        }
+        else {
+            return null;
+        }
     }
 
 }

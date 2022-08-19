@@ -84,6 +84,11 @@ form .text-field textarea:not(:placeholder-shown) ~ label {
   position: absolute;
   margin-left: -1.3em;
 }
+.ui-state-default {
+  width: 400px;
+  position: relative;
+  right: 60px;
+}
 table.dataTable thead th {
   border-bottom: 0;
 }
