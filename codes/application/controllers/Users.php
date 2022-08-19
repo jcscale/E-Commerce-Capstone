@@ -34,6 +34,7 @@ class Users extends CI_Controller {
         }
         else {
             if($current_user_id=="1") {
+
                 redirect('dashboards');
             } else {
                 redirect('customers');
@@ -56,8 +57,10 @@ class Users extends CI_Controller {
                 $this->session->set_userdata(array('user_id' => $user['id'], 'first_name' => $user['first_name']));
                 // $user['is_admin'] == 1 ? redirect('dashboards') : redirect('customers');
                 if($user['is_admin']=="1") {
+                    $this->session->set_flashdata('welcome_master', 'Welcome Master');
                     redirect('dashboards');
                 } else {
+                    $this->session->set_flashdata('welcome_master', 'Welcome Master');
                     redirect('customers');
                 }
                 // redirect('dashboards');

@@ -13,53 +13,6 @@ class Dashboards extends CI_Controller {
         }
     }
 
-    // public function loadData($record=0) {
-	// 	$recordPerPage = 3;
-	// 	if($record != 0){
-	// 	    	$record = ($record-1) * $recordPerPage;
-	// 	}      	
-    //   	$recordCount = $this->dashboard->get_count();
-    //   	$empRecord = $this->dashboard->fetch_all_products($record,$recordPerPage);
-    //   	$config['base_url'] = base_url() . "dashboards/loadData";
-    //   	$config['use_page_numbers'] = TRUE;
-        
-	// 	// $config['next_link'] = '<i class="pagi-next" style="border:1px solid blue; padding: 3px; text-decoration:none;">Next</i>';
-	// 	// $config['prev_link'] = '<i class="pagi-prev" style="border:1px solid blue; padding: 3px; text-decoration:none;">Previous</i>';
-
-        
-
-    //     // $config['num_links'] = 1;
-	// 	$config['total_rows'] = $recordCount;
-	// 	$config['per_page'] = $recordPerPage;
-
-    //     //Set that how many number of pages you want to view.
-    //     $config['num_links'] = $recordCount;
-
-    //     $config['num_tag_open'] = '<div class="digit">';
-
-
-    //     $config['num_tag_close'] = '</div>';
-
-    //     // Open tag for CURRENT link.
-    //     $config['cur_tag_open'] = '&nbsp;<a class="current">';
-
-    //     // Close tag for CURRENT link.
-    //     $config['cur_tag_close'] = '</a>';
-
-    //     // By clicking on performing NEXT pagination.
-    //     $config['next_link'] = 'Next';
-
-    //     // By clicking on performing PREVIOUS pagination.
-    //     $config['prev_link'] = 'Previous';
-
-	// 	$this->pagination->initialize($config);
-	// 	$data['pagination'] = $this->pagination->create_links();
-	// 	$data['products'] = $empRecord;
-    //     $data['categories'] = $this->dashboard->fetch_all_categories();
-    //     return $this->load->view('partials/dashboard_products', $data);
-    //     // return $data;
-	// }
-
      /*  DOCU: This function is triggered by default if the user is an admin.
         Owner: JC
     */
@@ -90,6 +43,9 @@ class Dashboards extends CI_Controller {
         
     }
 
+     /*  DOCU: This function is used to add product to the database
+        Owner: JC
+    */
     public function add_product() {
 
         $config['allowed_types'] = 'png|jpg|jpeg|webp';
@@ -120,6 +76,8 @@ class Dashboards extends CI_Controller {
 
             $this->dashboard->product_image($file_data);
 
+            $this->session->set_flashdata('product_added', 'Product added');
+
             redirect('products');
         }
         else {
@@ -138,12 +96,18 @@ class Dashboards extends CI_Controller {
     }
 
 
-
+     /*  DOCU: This function will delete the selected product
+        Owner: JC
+    */
     public function delete_product($id) {
         $this->dashboard->delete_product($id);
+        $this->session->set_flashdata('product_deleted', 'Product deleted');
         redirect('products');
     }
 
+       /*  DOCU: This function will retrieve the product and its details base on the id
+        Owner: JC
+    */
     public function product_detail($id) {
         $result_data = $this->dashboard->get_product_by_id($id);
         $product_id = $result_data['id'];
@@ -159,6 +123,9 @@ class Dashboards extends CI_Controller {
         // redirect('products');
     }
 
+       /*  DOCU: This function will will update the product base on the id
+        Owner: JC
+    */
     public function update_product() {
         $config['allowed_types'] = 'png|jpg|jpeg';
         $config['upload_path'] = './uploads/';
@@ -188,6 +155,8 @@ class Dashboards extends CI_Controller {
     
             $this->dashboard->update_product($id, $data);
 
+            $this->session->set_flashdata('product_updated', 'Product updated');
+
             redirect('products');
         }
         else {
@@ -196,6 +165,9 @@ class Dashboards extends CI_Controller {
            
     }
 
+       /*  DOCU: This function will show the details of the orders in the page
+        Owner: JC
+    */
     public function show($id) {
         $data['info'] = $this->dashboard->get_order_by_id($id);
         // var_dump($data['info']);

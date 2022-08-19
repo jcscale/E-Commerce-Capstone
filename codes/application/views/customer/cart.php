@@ -6,13 +6,17 @@
     <link rel="stylesheet" href="<?php echo base_url();?>assets/css/shopping_cart/shopping_cart.css">
     <script src="<?php echo base_url();?>assets/js/shopping_cart/shopping_cart.js"></script>
 
+    <!-- <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script> -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/css/toastr.css" rel="stylesheet"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/js/toastr.js"></script>
+
 
   </head>
   <body>
 
     <div class="container mt-3 p-3">
 
-    <!-- <?=$this->session->userdata('user_temp_orders')?> -->
+
 
         <?php if(!empty($temp_orders)){?>
             <table class="table table-striped">
@@ -177,6 +181,9 @@
                 <?php }?>
 
         <?php } else{?>
+            <?php if($this->session->flashdata('success')){ ?>
+                <script type="text/javascript">toastr.success('<?=$this->session->flashdata('success')?>')</script>
+            <?php } ?>
             <h3 class="text-center">No orders in the cart</h3>
             <?php }?>
         

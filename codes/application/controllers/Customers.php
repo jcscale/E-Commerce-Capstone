@@ -12,28 +12,17 @@ class Customers extends CI_Controller {
             redirect("/");
         }
     }
-    
+
+
+       /*  DOCU: This is the default page for the customers
+        Owner: JC
+    */
     public function index() {
 
-        // if(!empty($this->input->get('id'))) {
-        //     $id_val = $this->input->get('id');
-        //     $data['products'] = $this->customer->search_product($id_val);
-        //     $this->load->view('templates/header');
-        //     $this->load->view('templates/customer_nav');
-        //     $this->load->view('customer/category', $data);
-        //     $this->load->view('templates/footer');
-        // }
-
-        // if(!empty($this->input->post('search_word'))) {
-        //     $search_text = $this->input->post('search_word');
-        //     var_dump($search_text);
-        // }
-
-            $search_text = '';
-            if(!empty($this->input->post('search_word'))) {
-                $search_text = $this->input->post('search_word');
-                // var_dump($search_text);
-            }
+        $search_text = '';
+        if(!empty($this->input->post('search_word'))) {
+            $search_text = $this->input->post('search_word');
+        }
 
         $config = array();
         $config["base_url"] = base_url() . "customers/index";
@@ -76,18 +65,8 @@ class Customers extends CI_Controller {
         $data["links"] = $this->pagination->create_links();
 
         $data['products'] = $this->customer->get_all_products($config["per_page"], $config["per_page"]*($page-1), $search_text);
-
-
-        // $data['products'] = $this->customer->get_all_products();
-
         $data['categories'] = $this->customer->fetch_all_categories();
         $data['page'] = $page;
-
-
-        // $data['products'] = $this->customer->get_all_products();
-
-        // var_dump($data);
-
 
         if(!empty($this->customer->count_user_temp_order($this->session->userdata('user_id')))) {
             $data['user_temp_orders'] = $this->customer->count_user_temp_order($this->session->userdata('user_id'));
@@ -100,6 +79,10 @@ class Customers extends CI_Controller {
         $this->load->view('templates/footer');
     }
 
+
+   /*  DOCU: This function will retrieve all the categories and display it in the page
+        Owner: JC
+    */
     public function category($category_id) {
 
         $search_text = '';
@@ -144,13 +127,7 @@ class Customers extends CI_Controller {
 
         $this->pagination->initialize($config);
         $page = ($this->uri->segment(4))? $this->uri->segment(4) : 1;   
-        $data["links"] = $this->pagination->create_links();
-
-        // $data['products'] = $this->customer->get_all_products($config["per_page"], $page);
-
-        // var_dump($category_id);
-        // var_dump($this->customer->category_count($category_id));
-        
+        $data["links"] = $this->pagination->create_links();       
 
         $data['categories'] = $this->customer->fetch_all_categories();
 
@@ -158,11 +135,6 @@ class Customers extends CI_Controller {
         $data['products'] = $this->customer->filter_by_category($category_id, $config["per_page"], $config["per_page"]*($page-1), $search_text);
         $data['page'] = $page;
 
-        // if(!empty($this->customer->count_user_temp_order($this->session->userdata('user_id')))) {
-        //     // $this->session->set_userdata('user_temp_orders', $this->customer->count_user_temp_order());
-        //     $data['user_temp_orders'] = $this->customer->count_user_temp_order($this->session->userdata('user_id'));
-        // }
-    
         $this->load->view('templates/header');
         $this->load->view('templates/customer_nav');
         $this->load->view('customer/category', $data);
@@ -171,11 +143,11 @@ class Customers extends CI_Controller {
 
 
 
+   /*  DOCU: This function displays the user's shipping and billing information and 
+   allows the user to create or update info
+        Owner: JC
+    */
     public function setting() {
-        // if(!empty($this->customer->count_user_temp_order($this->session->userdata('user_id')))) {
-        //     // $this->session->set_userdata('user_temp_orders', $this->customer->count_user_temp_order());
-        //     $data['user_temp_orders'] = $this->customer->count_user_temp_order($this->session->userdata('user_id'));
-        // }
 
         $data['shipping'] = $this->customer->get_shipping_info($this->session->userdata('user_id'));
         $data['billing'] = $this->customer->get_billing_info($this->session->userdata('user_id'));
@@ -186,6 +158,9 @@ class Customers extends CI_Controller {
         $this->load->view('templates/footer');
     }
 
+       /*  DOCU: This function will update the user's shipping and billing info
+        Owner: JC
+    */
     public function update_setting() {
         $data = $this->input->post();
         
@@ -216,15 +191,16 @@ class Customers extends CI_Controller {
 
         redirect('customers/setting');
         
-
-
     }
 
+
+   /*  DOCU: This function will show the details of a certain product
+        Owner: JC
+    */
     public function show($id) {
         $data['product'] = $this->customer->product_detail($id);
         $data['images'] = $this->customer->fetch_images($id);
         $data['similar_items'] = $this->customer->similar_items($id, $data['product']['category_id']);
-        // var_dump($data['similar_items']);
 
         if(!empty($this->customer->count_user_temp_order($this->session->userdata('user_id')))) {
             $data['user_temp_orders'] = $this->customer->count_user_temp_order($this->session->userdata('user_id'));
@@ -238,19 +214,14 @@ class Customers extends CI_Controller {
 
     }
 
+       /*  DOCU: This function displays the products that the user wants to buy
+        Owner: JC
+    */
     public function cart() {
         $data['temp_orders'] = $this->customer->get_user_temp_orders();
         $data['total_temp_price'] = $this->customer->get_total_temp_order_price($this->session->userdata('user_id'));
         $data['shipping'] = $this->customer->get_shipping_info($this->session->userdata('user_id'));
         $data['billing'] = $this->customer->get_billing_info($this->session->userdata('user_id'));
-
-        // if(!empty($this->customer->count_user_temp_order($this->session->userdata('user_id')))) {
-            
-        //     $data['user_temp_orders'] = $this->customer->count_user_temp_order($this->session->userdata('user_id'));
-        //     $this->session->set_userdata('user_temp_orders', $data['user_temp_orders']);      
-        // }
-
-        // var_dump($data['user_temp_orders']);
 
         $this->load->view('templates/header');
         $this->load->view('templates/customer_nav');
@@ -258,12 +229,15 @@ class Customers extends CI_Controller {
         $this->load->view('templates/footer');
     }
 
+       /*  DOCU: This function will trigger if the user and will store temporarily the products
+       which the user wants to buy
+        Owner: JC
+    */
     public function temp_orders () {
         $cart = $this->input->post();
         $id = $this->customer->product_detail($cart['product_id']);
-        // var_dump($cart);
-        // var_dump($id);
-        echo($this->session->userdata('user_id'));
+
+        // echo($this->session->userdata('user_id'));
 
         $temp_order = array(
             'product_id' => $id['id'],
@@ -274,15 +248,22 @@ class Customers extends CI_Controller {
             'users_id' => $this->session->userdata('user_id'),
         );
 
+        $this->session->set_flashdata('order_success', 'Order successfully added to cart.');
         $this->customer->insert_to_temp_order($temp_order);
         redirect('customers/show/'.$id['id']);
     }
 
+       /*  DOCU: This function will delete the selected product in the cart
+        Owner: JC
+    */
     public function delete_temp_order($id) {
         $this->customer->delete_temp_order($id);
         redirect('customers/cart');
     }
 
+       /*  DOCU: This function will save the infos 
+        Owner: JC
+    */
     public function save_setting() {
         $data = $this->input->post();
         // var_dump($data);
@@ -318,20 +299,25 @@ class Customers extends CI_Controller {
         
     }
 
+       /*  DOCU: This function uses stripe api and will trigger if the user will checkout the items
+        Owner: JC
+    */
     public function handlePayment()
     {
+        $info = $this->input->post();
+        
         require_once('application/libraries/stripe-php/init.php');
     
         \Stripe\Stripe::setApiKey($this->config->item('stripe_secret'));
      
         \Stripe\Charge::create ([
-                "amount" => 100 * 120,
+                "amount" => 100 * (int)$info['total_price'],
                 "currency" => "inr",
                 "source" => $this->input->post('stripeToken'),
                 "description" => "Dummy stripe payment." 
         ]);
 
-        $info = $this->input->post();
+        
         
         $data = array(
             'total_price' => $info['total_price'],
@@ -349,16 +335,11 @@ class Customers extends CI_Controller {
         redirect('customers/cart', 'refresh');
     }
 
+   /*  DOCU: This function will show the order history of the user
+        Owner: JC
+    */
     public function order() {
-        // if(!empty($this->customer->count_user_temp_order($this->session->userdata('user_id')))) {
-        //     // $this->session->set_userdata('user_temp_orders', $this->customer->count_user_temp_order());
-        //     $data['user_temp_orders'] = $this->customer->count_user_temp_order($this->session->userdata('user_id'));
-        // }
-        
         $data['orders'] = $this->customer->get_customer_orders($this->session->userdata('user_id'));
-        // $json_data = json_decode($data['orders'][0]['order_info'], true);
-        // $data['json_orders'] = $json_data;
-        // var_dump($data['orders']);
 
         $i=0;
         $data2 = [];
@@ -367,9 +348,7 @@ class Customers extends CI_Controller {
                 $data2[] = $order;
             }
         }
-        
 
-        // var_dump( $data2);
         
         $data['customer_items'] = $data2;
         $this->load->view('templates/header');

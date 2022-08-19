@@ -7,10 +7,18 @@
     <link rel="stylesheet" href="<?php echo base_url();?>assets/css/dashboard_orders/dashboard_orders.css">
 
     <script type="text/javascript" src="<?php echo base_url();?>assets/js/dashboard/dashboard.js" charset="utf-8"></script>
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/css/toastr.css" rel="stylesheet"/>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/js/toastr.js"></script>
+
   </head>
   <body>
 
   <div class="container mt-3">
+
+        <?php if($this->session->flashdata('welcome_master')){ ?>
+            <script type="text/javascript">toastr.success('<?=$this->session->flashdata('welcome_master')?>')</script>
+        <?php } ?>
 
   <div class="row">
             <div class="col-md-6 d-flex justify-content-start">

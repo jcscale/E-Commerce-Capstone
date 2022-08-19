@@ -6,15 +6,25 @@
     <link rel="stylesheet" href="<?php echo base_url();?>assets/css/setting/setting.css">
     <script src="<?php echo base_url();?>assets/js/setting/setting.js"></script>
 
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/css/toastr.css" rel="stylesheet"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/js/toastr.js"></script>
+
 
   </head>
   <body>
 
     <div class="container mt-3">
 
+        <?php if($this->session->flashdata('update_success')){ ?>
+            <script type="text/javascript">toastr.success('<?=$this->session->flashdata('update_success')?>')</script>
+        <?php } ?>
+
+        <?php if($this->session->flashdata('settings_save')){ ?>
+            <script type="text/javascript">toastr.success('<?=$this->session->flashdata('settings_save')?>')</script>
+        <?php } ?>
         
         <?php if(!empty($shipping)){?>
-            <?php if($this->session->flashdata('settings_save')){?>
+            <!-- <?php if($this->session->flashdata('settings_save')){?>
             <div class="alert alert-success" role="alert">
                 Settings Saved
             </div>
@@ -24,7 +34,7 @@
                 <div class="alert alert-success" role="alert">
                 Updated Successfully
                 </div>
-            <?php }?>
+            <?php }?> -->
 
             <form action="<?=base_url()?>customers/update_setting" method="post"
                 class="form-validation" data-cc-on-file="false"

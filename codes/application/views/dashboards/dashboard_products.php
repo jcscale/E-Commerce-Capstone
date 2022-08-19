@@ -10,10 +10,27 @@
     <script src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
 
     <script type="text/javascript" src="<?php echo base_url();?>assets/js/dashboard_products/dashboard_products.js" charset="utf-8"></script>
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/css/toastr.css" rel="stylesheet"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/js/toastr.js"></script>
+
   </head>
   <body>
 
   <div class="container mt-3">
+
+        <?php if($this->session->flashdata('product_deleted')){ ?>
+            <script type="text/javascript">toastr.success('<?=$this->session->flashdata('product_deleted')?>')</script>
+        <?php } ?>
+
+        <?php if($this->session->flashdata('product_added')){ ?>
+            <script type="text/javascript">toastr.success('<?=$this->session->flashdata('product_added')?>')</script>
+        <?php } ?>
+
+        <?php if($this->session->flashdata('product_updated')){ ?>
+            <script type="text/javascript">toastr.success('<?=$this->session->flashdata('product_updated')?>')</script>
+        <?php } ?>
+
         <div class="row">
             <div class="col-md-6 d-flex justify-content-start">
                 <form action="">
@@ -235,9 +252,7 @@
 
                         <div class="mb-3 img-sortable">
                             <ul id="sortable">
-                              <!-- <li class="ui-state-default"><span class="ui-icon ui-icon-grip-solid-horizontal ms-3"></span><img class="ms-3 me-3" src="Pocket-T-shirt_122719.webp" alt="" width="50" height="50">Image 1 <span class="ui-icon ui-icon-trash ms-5"></span></li>
-                              <li class="ui-state-default"><span class="ui-icon ui-icon-grip-solid-horizontal ms-3"></span><img class="ms-3 me-3" src="Pocket-T-shirt_122719.webp" alt="" width="50" height="50">Image 2 <span class="ui-icon ui-icon-trash ms-5"></span></li>
-                              <li class="ui-state-default"><span class="ui-icon ui-icon-grip-solid-horizontal ms-3"></span><img class="ms-3 me-3" src="Pocket-T-shirt_122719.webp" alt="" width="50" height="50">Image 3 <span class="ui-icon ui-icon-trash ms-5"></span></li> -->
+                              
                             </ul>
                         </div>
                          

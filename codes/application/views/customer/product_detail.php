@@ -2,11 +2,19 @@
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <link rel="stylesheet" href="<?php echo base_url();?>assets/css/product_details/product_details.css">
 <script src="<?php echo base_url();?>assets/js/product_details/product_details.js"></script>
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/css/toastr.css" rel="stylesheet"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/js/toastr.js"></script>
+
   </head>
   <body>    
 
     <div class="container mt-3">
         <a href="<?=base_url()?>customers">Go back</a>
+
+        <?php if($this->session->flashdata('order_success')){ ?>
+            <script type="text/javascript">toastr.success('<?=$this->session->flashdata('order_success')?>')</script>
+        <?php } ?>
 
         <h2><?=$product['name']?></h2>
         <div class="product_img">
@@ -50,26 +58,6 @@
                 
             <?php }?>
                 
-                <!-- <div class="img_wrapper">
-                    <img src="../dashboard_products/Pocket-T-shirt_122719.webp" alt="" width="100" height="100">
-                    <p class="img_price">$19.99</p>
-                    <p class="img_name">T-shirt</p>
-                </div>
-                <div class="img_wrapper">
-                    <img src="../dashboard_products/Pocket-T-shirt_122719.webp" alt="" width="100" height="100">
-                    <p class="img_price">$19.99</p>
-                    <p class="img_name">T-shirt</p>
-                </div>
-                <div class="img_wrapper">
-                    <img src="../dashboard_products/Pocket-T-shirt_122719.webp" alt="" width="100" height="100">
-                    <p class="img_price">$19.99</p>
-                    <p class="img_name">T-shirt</p>
-                </div>
-                <div class="img_wrapper">
-                    <img src="../dashboard_products/Pocket-T-shirt_122719.webp" alt="" width="100" height="100">
-                    <p class="img_price">$19.99</p>
-                    <p class="img_name">T-shirt</p>
-                </div> -->
                 
                 
             </div>
